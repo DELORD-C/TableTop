@@ -1,0 +1,32 @@
+{% extends 'mj.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        <h1>Liste des joueurs</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    {% if 'ROLE_MJ' not in player.roles %}
+                        <tr>
+                            <td><img class="token" alt="token" src="{{ asset('uploads/' ~ player.token.image) }}"></td>
+                            <td><p>{{ player.name }}</p></td>
+                            <td><p>{{ player.username }}</p></td>
+                            <td>
+                                <a href="{{ path('app_player_edit', {'player': player.id}) }}" class="btn btn-primary">Voir</a>
+                                <a href="{{ path('app_player_delete', {'player': player.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ player.username}} ?'))">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

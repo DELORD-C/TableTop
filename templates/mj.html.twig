@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'includes/_dice.html.twig' %}
+    {% include 'includes/_notify.html.twig' %}
+    {% include 'includes/_nav.html.twig' %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Général</div>
+                        <a class="nav-link" href="{{ path('app_default_home') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-speedometer"></i></div>
+                            Tableau de bord
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Partie</div>
+                        <a class="nav-link" href="{{ path('app_game_fight') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-shield"></i></div>
+                            Combat
+                        </a>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseJoueurs" aria-expanded="false" aria-controls="collapseJoueurs">
+                            <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
+                            Joueurs
+                            <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseJoueurs" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ path('app_player_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link" href="{{ path('app_player_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePNJ" aria-expanded="false" aria-controls="collapsePNJ">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            PNJ
+                            <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePNJ" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ path('app_pnj_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link" href="{{ path('app_pnj_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link" href="{{ path('app_game_inventory') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-handbag-fill"></i></div>
+                            Inventaire
+                        </a>
+                        <a class="nav-link" href="{{ path('app_game_notes') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+                            Notes
+                        </a>
+                        <a class="nav-link" href="{{ path('app_game_map') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-map-fill"></i></div>
+                            Map
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Outils</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseToken" aria-expanded="false" aria-controls="collapseToken">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-chess-knight"></i></div>
+                            Tokens
+                            <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseToken" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" target="_blank" href="https://tools.2minutetabletop.com"><div class="sb-nav-link-icon"><i class="fa-solid fa-chess-knight"></i></div>Edition</a>
+                                <a class="nav-link" href="{{ path('app_token_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link" href="{{ path('app_token_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link" href="#" id="dice-btn">
+                            <div class="sb-nav-link-icon"><i class="bi bi-dice-6-fill"></i></div>
+                            Dés
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{ app.user.username }}
+                    {% if is_granted('ROLE_MJ') %} (MJ) {% endif %}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>{% block main %}{% endblock %}</main>
+            {% include 'includes/_footer.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+    <div class="container-fluid d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 96px)">
+        <h1 class="mb-4">Connexion</h1>
+        <form method="POST" class="tinyForm" autocomplete="off">
+            <input autocomplete="false" name="hidden" type="text" style="display:none;">
+            <div class="form-floating mb-3">
+                <input autocomplete="off" type="text" name="_username" class="bg-dark form-control" id="username" placeholder="Ex : Zulgard">
+                <label for="username"><i class="bi bi-person" style="margin-right: 5px;"></i>Pseudo</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input autocomplete="off" type="password" name="_password" class="bg-dark form-control" id="password" placeholder="Ex : kaèfcé">
+                <label for="password"><i class="bi bi-lock-fill" style="margin-right: 5px;"></i>Mot de passe</label>
+            </div>
+            <div class="d-grid gap-2 mb-3">
+                <input type="submit" class="btn btn-primary" value="Connexion">
+            </div>
+            <div class="d-grid gap-2">
+                <a class="btn btn-success" href="{{ path('app_game_create') }}">Créer une partie</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

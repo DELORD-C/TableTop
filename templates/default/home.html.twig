@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_MJ') %}
+    {% include 'mj/dashboard.html.twig' %}
+{% else %}
+    {% include 'player/dashboard.html.twig' %}
+{% endif %}
