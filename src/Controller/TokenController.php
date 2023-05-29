@@ -8,6 +8,7 @@ use App\Repository\TokenRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,8 +58,9 @@ class TokenController extends AbstractController
     }
 
     #[Route('/delete/{token}')]
-    function delete (Token $token, EntityManagerInterface $em): RedirectResponse
+    function delete (Token $token, EntityManagerInterface $em, Filesystem $fs): RedirectResponse
     {
+        $fs->remove($token->getImage());
         $em->remove($token);
         $em->flush();
 

@@ -14,7 +14,7 @@
             <tbody>
                 {% for token in tokens %}
                     <tr>
-                        <td><img alt="token" class="token" src="{{ asset('uploads/' ~ token.image) }}"></td>
+                        <td><img alt="token" class="token" src="{{ asset('build/uploads/' ~ token.image) }}"></td>
                         <td><p>{{ token.name }}</p></td>
                         <td>
                             <a href="{{ path('app_token_delete', {'token': token.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ token.name}} ?'))">Supprimer</a>

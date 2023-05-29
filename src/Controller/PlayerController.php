@@ -54,7 +54,7 @@ class PlayerController extends AbstractController
                 )
             );
             $player->setGame($game);
-            $player->setToken($tokenRepository->findOneBy(['name' => 'Défaut']));
+            $player->setToken($tokenRepository->getDefault());
             $em->persist($player);
             $em->flush();
             return $this->redirectToRoute('app_player_list');
@@ -96,7 +96,7 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{player}')]
+    #[Route('/player/delete/{player}')]
     function delete (Player $player, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($player);
