@@ -54,12 +54,12 @@ class Game
 
     public function getNote(): ?string
     {
-        return $this->note;
+        return $this->notes;
     }
 
-    public function setNote(?string $note): self
+    public function setNote(?string $notes): self
     {
-        $this->note = $note;
+        $this->notes = $notes;
 
         return $this;
     }

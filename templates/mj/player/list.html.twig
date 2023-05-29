@@ -16,7 +16,7 @@
                 {% for player in players %}
                     {% if 'ROLE_MJ' not in player.roles %}
                         <tr>
-                            <td><img class="token" alt="token" src="{{ asset('uploads/' ~ player.token.image) }}"></td>
+                            <td><img class="token" alt="token" src="{{ asset('build/uploads/' ~ player.token.image) }}"></td>
                             <td><p>{{ player.name }}</p></td>
                             <td><p>{{ player.username }}</p></td>
                             <td>

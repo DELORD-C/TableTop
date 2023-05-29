@@ -20,7 +20,7 @@
                                                 <div>
                                                     <h6 class="text-center">{{ player.name }} {{ player.username }}</h6>
                                                     <div class="char-main updatable-object" type="player">
-                                                        <img src="{{ asset('uploads/' ~ player.token.image) }}">
+                                                        <img src="{{ asset('build/uploads/' ~ player.token.image) }}">
                                                         <div class="char-controls">
                                                             <div class="stat-controls" stat="PV" type="Player" max="{{ player.PVM }}" id="{{ player.id }}">
                                                                 <button class="btn btn-dark">-</button>
@@ -95,7 +95,7 @@
                                             <div>
                                                 <h6 class="text-center">{{ pnj.name }}</h6>
                                                 <div class="char-main updatable-object" type="PNJ">
-                                                    <img src="{{ asset('uploads/' ~ pnj.token.image) }}">
+                                                    <img src="{{ asset('build/uploads/' ~ pnj.token.image) }}">
                                                     <div class="char-controls">
                                                         <div class="stat-controls" stat="PV" type="PNJ" max="{{ pnj.PVM }}" id="{{ pnj.id }}">
                                                             <button class="btn btn-dark">-</button>

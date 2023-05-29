@@ -39,6 +39,22 @@ class TokenRepository extends ServiceEntityRepository
         }
     }
 
+    public function getDefault(): Token
+    {
+        $default = $this->findOneBy(['name' => 'default']);
+        if ($default) {
+            return $default;
+        }
+        else {
+            $default = new Token;
+            $default->setName('default');
+            $default->setImage('goblin.png');
+            $this->_em->persist($default);
+            $this->_em->flush();
+            return $default;
+        }
+    }
+
 //    /**
 //     * @return Token[] Returns an array of Token objects
 //     */

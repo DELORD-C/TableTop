@@ -23,11 +23,11 @@
     },
     "dependencies": {
         "@3d-dice/dice-box": "^1.0.8",
+        "axios": "^1.4.0",
         "bootstrap": "^5.2.3",
         "bootstrap-icons": "^1.10.4",
         "chart.js": "^4.2.1",
         "file-loader": "^6.2.0",
-        "trix": "^2.0.4",
-        "axios": "^1.4.0"
+        "trix": "^2.0.4"
     }
 }

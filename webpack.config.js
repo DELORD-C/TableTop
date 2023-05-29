@@ -76,6 +76,15 @@ Encore
         from: './assets/medias',
         to: 'medias/[path][name].[hash:8].[ext]'
     })
+    .copyFiles({
+        from: './assets/tokens',
+        to: 'uploads/[path][name].[hash:8].[ext]'
+    })
+    .copyFiles({
+        from: './assets/dice-themes',
+        to: '../assets/themes/[path][name].[ext]',
+        includeSubdirectories: true
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
