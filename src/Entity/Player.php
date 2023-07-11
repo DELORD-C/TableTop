@@ -97,6 +97,17 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?Token $token = null;
 
+    #[ORM\Column]
+    private ?bool $isFighting = null;
+
+    #[ORM\Column]
+    private ?bool $isPlaying = null;
+
+    public function __construct() {
+        $this->isPlaying = 0;
+        $this->isFighting = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -439,6 +450,30 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function setToken(?Token $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function isIsFighting(): ?bool
+    {
+        return $this->isFighting;
+    }
+
+    public function setIsFighting(bool $isFighting): self
+    {
+        $this->isFighting = $isFighting;
+
+        return $this;
+    }
+
+    public function isIsPlaying(): ?bool
+    {
+        return $this->isPlaying;
+    }
+
+    public function setIsPlaying(bool $isPlaying): self
+    {
+        $this->isPlaying = $isPlaying;
 
         return $this;
     }

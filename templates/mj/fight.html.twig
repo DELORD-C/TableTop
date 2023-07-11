@@ -10,69 +10,11 @@
                         <i class="fas fa-chart-area me-1"></i>
                         Joueurs
                     </div>
-                    <div class="card-body entity-container">
+                    <div class="card-body entity-container player-container">
                         <div class="row overflow-x entity-list">
                             {% for player in players %}
-                                {% if 'ROLE_MJ' not in player.roles %}
-                                    <div class="entity-card player-card">
-                                        <div class="card text-white shadow-sm">
-                                            <div class="card-body">
-                                                <div>
-                                                    <h6 class="text-center">{{ player.name }} {{ player.username }}</h6>
-                                                    <div class="char-main updatable-object" type="player">
-                                                        <img src="{{ asset('build/uploads/' ~ player.token.image) }}">
-                                                        <div class="char-controls">
-                                                            <div class="stat-controls" stat="PV" type="Player" max="{{ player.PVM }}" id="{{ player.id }}">
-                                                                <button class="btn btn-dark">-</button>
-                                                                <p>
-                                                                    <i class="bi bi-heart-fill" style="color: red"></i>
-                                                                    <i class="mask" style="height: {% if player.PVM > 0 %}{{ 100 - (player.PV * 100 / player.PVM) }}{% else %}0{% endif %}%"></i>
-                                                                    <span class="updatable-stat" stat="PV">{{ player.PV }}</span>
-                                                                </p>
-                                                                <button class="btn btn-dark">+</button>
-                                                            </div>
-                                                            <div class="stat-controls" stat="PC" type="Player" max="{{ player.PCM }}" id="{{ player.id }}">
-                                                                <button class="btn btn-dark">-</button>
-                                                                <p>
-                                                                    <i class="bi bi-gear-fill" style="color: orange"></i>
-                                                                    <i class="mask" style="height: {% if player.PCM > 0 %}{{ 100 - (player.PC * 100 / player.PCM) }}{% else %}0{% endif %}%"></i>
-                                                                    <span class="updatable-stat" stat="PC">{{ player.PC }}</span>
-                                                                </p>
-                                                                <button class="btn btn-dark">+</button>
-                                                            </div>
-                                                            <div class="stat-controls" stat="PM" type="Player" max="{{ player.PMM }}" id="{{ player.id }}">
-                                                                <button class="btn btn-dark">-</button>
-                                                                <p>
-                                                                    <i class="bi bi-droplet-fill" style="color: dodgerblue"></i>
-                                                                    <i class="mask" style="height: {% if player.PMM > 0 %}{{ 100 - (player.PM * 100 / player.PMM) }}{% else %}0{% endif %}%"></i>
-                                                                    <span class="updatable-stat">{{ player.PM }}</span>
-                                                                </p>
-                                                                <button class="btn btn-dark">+</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <table class="stats table table-borderless">
-                                                    <tr>
-                                                        <th>Fo</th>
-                                                        <th>In</th>
-                                                        <th>So</th>
-                                                        <th>Pe</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ player.strength }}</td>
-                                                        <td>{{ player.intel }}</td>
-                                                        <td>{{ player.social }}</td>
-                                                        <td>{{ player.perception }}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <a target="_blank" href="{{ path('app_player_edit', {'player': player.id}) }}" class="card-footer d-flex align-items-center justify-content-between">
-                                                <p class="small text-white" style="margin: auto 0;">Modifier</p>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                {% if 'ROLE_MJ' not in player.roles and not player.isFighting %}
+                                    {% include 'includes/_player-card.html.twig' with { player: player} %}
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -86,36 +28,12 @@
                         <i class="fas fa-chart-area me-1"></i>
                         PNJs
                     </div>
-                    <div class="card-body entity-container">
+                    <div class="card-body entity-container pnj-container">
                         <div class="row overflow-x entity-list">
                             {% for pnj in pnjs %}
-                                <div class="entity-card pnj-card">
-                                    <div class="card text-white shadow-sm">
-                                        <div class="card-body">
-                                            <div>
-                                                <h6 class="text-center">{{ pnj.name }}</h6>
-                                                <div class="char-main updatable-object" type="PNJ">
-                                                    <img src="{{ asset('build/uploads/' ~ pnj.token.image) }}">
-                                                    <div class="char-controls">
-                                                        <div class="stat-controls" stat="PV" type="PNJ" max="{{ pnj.PVM }}" id="{{ pnj.id }}">
-                                                            <button class="btn btn-dark">-</button>
-                                                            <p>
-                                                                <i class="bi bi-heart-fill" style="color: red"></i>
-                                                                <i class="mask" style="height: {% if pnj.PVM > 0 %}{{ 100 - (pnj.PV * 100 / pnj.PVM) }}{% else %}0{% endif %}%"></i>
-                                                                <span class="updatable-stat" stat="PV">{{ pnj.PV }}</span>
-                                                            </p>
-                                                            <button class="btn btn-dark">+</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a target="_blank" href="{{ path('app_pnj_edit', {'pnj': pnj.id}) }}" class="card-footer d-flex align-items-center justify-content-between">
-                                            <p class="small text-white" style="margin: auto 0;">Modifier</p>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </a>
-                                    </div>
-                                </div>
+                                {% if not pnj.isFighting %}
+                                    {% include 'includes/_pnj-card.html.twig' with { pnj: pnj} %}
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -124,23 +42,29 @@
         </div>
         <div class="row">
             <div class="col">
-                <div class="card mb-4">
+                <div class="card mb-4 timeline">
                     <div class="card-header">
+                        <button class="next-turn btn btn-dark"><i class="bi bi-play-btn"></i></button>
+                        <button class="sort-btn btn btn-dark"><i class="bi bi-shuffle"></i></button>
                         <i class="fas fa-chart-area me-1"></i>
                         Timeline
                     </div>
-                    <div class="card-body entity-container">
-                        <div class="row overflow-x entity-list">
-                            
+                    <div class="card-body entity-container fight-container">
+                        <div class="row overflow-x entity-list" id="timeline">
+                            {% for player in players %}
+                                {% if 'ROLE_MJ' not in player.roles and player.isFighting %}
+                                    {% include 'includes/_player-card.html.twig' with { player: player} %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for pnj in pnjs %}
+                                {% if pnj.isFighting %}
+                                    {% include 'includes/_pnj-card.html.twig' with { pnj: pnj} %}
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
 {% endblock %}

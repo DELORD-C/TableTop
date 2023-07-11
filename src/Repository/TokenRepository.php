@@ -41,14 +41,14 @@ class TokenRepository extends ServiceEntityRepository
 
     public function getDefault(): Token
     {
-        $default = $this->findOneBy(['name' => 'default']);
+        $default = $this->findOneBy(['name' => 'Défaut']);
         if ($default) {
             return $default;
         }
         else {
             $default = new Token;
-            $default->setName('default');
-            $default->setImage('goblin.png');
+            $default->setName('Défaut');
+            $default->setImage('default.png');
             $this->_em->persist($default);
             $this->_em->flush();
             return $default;

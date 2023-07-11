@@ -78,7 +78,7 @@ Encore
     })
     .copyFiles({
         from: './assets/tokens',
-        to: 'uploads/[path][name].[hash:8].[ext]'
+        to: 'uploads/[path][name].[ext]'
     })
     .copyFiles({
         from: './assets/dice-themes',

@@ -17,6 +17,7 @@ require('./js/all');
 require('./js/script');
 require('./js/dice');
 require('./js/ajax');
+require('./js/fight');
 
 // Start the Stimulus application
 import './bootstrap';

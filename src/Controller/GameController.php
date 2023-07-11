@@ -9,8 +9,10 @@ use App\Form\InventoryType;
 use App\Form\NotesType;
 use App\Repository\PlayerRepository;
 use App\Repository\PNJRepository;
+use App\Service\TokenCreator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -19,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     #[Route('/game/delete/{game}')]
-    function delete (Game $game, EntityManagerInterface $em)
+    function delete (Game $game, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($game);
         $em->flush();
@@ -28,7 +30,12 @@ class GameController extends AbstractController
     }
 
     #[Route('/game/create')]
-    public function create(Request $request, UserPasswordHasherInterface $playerPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function create(
+        Request $request,
+        UserPasswordHasherInterface $playerPasswordHasher,
+        EntityManagerInterface $entityManager,
+        TokenCreator $tokenCreator
+    ): Response
     {
         $player = new Player();
         $form = $this->createForm(GameType::class, $player);
@@ -49,6 +56,7 @@ class GameController extends AbstractController
             $player->setGame($game);
             $entityManager->persist($player);
             $entityManager->persist($game);
+            $tokenCreator->createBaseTokens();
             $entityManager->flush();
 
             return $this->redirectToRoute('app_default_home');

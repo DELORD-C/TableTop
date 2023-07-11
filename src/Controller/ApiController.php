@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Player;
+use App\Entity\PNJ;
 use App\Service\CustomSerializer;
+use App\Service\FightSetter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,5 +48,18 @@ class ApiController extends AbstractController
         }
         $em->flush();
         return $this->json($entity->{'get' . $stat}());
+    }
+
+    #[Route("/switchPlaying/{type}/{entity}")]
+    public function switchPlaying(string $type, int $entity, FightSetter $fightSetter): Response
+    {
+        $fightSetter->setPlaying($type, $entity);
+        return $this->json(true);
+    }
+
+    #[Route("/switchFighting/{type}/{entity}")]
+    public function switchFighting(string $type, int $entity, FightSetter $fightSetter): Response
+    {
+        return $this->json($fightSetter->toggleFighting($type, $entity));
     }
 }

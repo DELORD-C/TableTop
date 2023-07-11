@@ -41,6 +41,17 @@ class PNJ
     #[ORM\Column(nullable: true)]
     private ?int $dmg_fixed = null;
 
+    #[ORM\Column]
+    private ?bool $isFighting = null;
+
+    #[ORM\Column]
+    private ?bool $isPlaying = null;
+
+    public function __construct() {
+        $this->isPlaying = 0;
+        $this->isFighting = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +166,30 @@ class PNJ
     public function setDmgFixed(?int $dmg_fixed): self
     {
         $this->dmg_fixed = $dmg_fixed;
+
+        return $this;
+    }
+
+    public function isIsFighting(): ?bool
+    {
+        return $this->isFighting;
+    }
+
+    public function setIsFighting(bool $isFighting): self
+    {
+        $this->isFighting = $isFighting;
+
+        return $this;
+    }
+
+    public function isIsPlaying(): ?bool
+    {
+        return $this->isPlaying;
+    }
+
+    public function setIsPlaying(bool $isPlaying): self
+    {
+        $this->isPlaying = $isPlaying;
 
         return $this;
     }

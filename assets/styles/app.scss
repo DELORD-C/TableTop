@@ -105,15 +105,41 @@ table {
   .entity-card {
     width: 200px;
 
+    table {
+      font-size: 13px;
+    }
+
     .card-body {
       height: 200px;
       background-color: $dark4;
+
+      h6 {
+        font-size: 0.8rem;
+        margin-right: 10px;
+        margin-bottom: 0;
+
+        &~div {
+          display: flex;
+        }
+      }
     }
 
     img {
       width: 100%;
     }
   }
+}
+
+.playing {
+  .card {
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px #FFA52B!important;
+  }
+}
+
+.fight-play {
+  display: none;
 }
 
 .notify {
@@ -184,7 +210,7 @@ table {
         top: 0;
         left: 0;
         width: 100%;
-        height: 0%;
+        height: 0;
         background: #202020;
         filter: brightness(1)!important;
       }
@@ -211,7 +237,7 @@ table {
 .stats {
   margin: 0;
   th, td {
-    padding: 0px;
+    padding: 0;
     text-align: center;
   }
 }
@@ -222,11 +248,56 @@ table {
   right: 5px;
   height: 30px;
   width: 150px;
-  padding: 0px 7px;
+  padding: 0 7px;
   border: none;
   background: #1f1f1f;
 }
 
 .hidden {
   display: none;
+}
+
+.fight-container {
+  .fight-play {
+    display: flex;
+  }
+}
+
+.fight-toggle {
+  display: flex;
+}
+
+.fight-toggle, .fight-play {
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+
+
+  &.hidden {
+    display: none
+  }
+
+  i {
+    font-size: 10px;
+    pointer-events: none;
+  }
+}
+
+.timeline {
+  .card-header {
+    button {
+      position: absolute;
+      top: 1px;
+
+      &.sort-btn {
+        right: 45px;
+      }
+
+      &.next-turn {
+        right: 1px;
+      }
+    }
+  }
 }
