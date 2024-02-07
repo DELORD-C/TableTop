@@ -20,8 +20,8 @@
                             <td><p>{{ player.name }}</p></td>
                             <td><p>{{ player.username }}</p></td>
                             <td>
-                                <a href="{{ path('app_player_edit', {'player': player.id}) }}" class="btn btn-primary">Voir</a>
-                                <a href="{{ path('app_player_delete', {'player': player.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ player.username}} ?'))">Supprimer</a>
+                                <a href="{{ path('app_mj_player_edit', {'player': player.id}) }}" class="btn btn-primary">Voir</a>
+                                <a href="{{ path('app_mj_player_delete', {'player': player.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ player.username}} ?'))">Supprimer</a>
                             </td>
                         </tr>
                     {% endif %}

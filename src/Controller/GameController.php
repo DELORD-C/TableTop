@@ -112,7 +112,7 @@ class GameController extends AbstractController
     #[Route('/fight')]
     function fight (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
-        return $this->render('mj/fight.html.twig', [
+        return $this->render('player/fight.html.twig', [
             'pnjs' => $PNJRepository->findAll(),
             'players' => $playerRepository->findAll()
         ]);
@@ -121,7 +121,7 @@ class GameController extends AbstractController
     #[Route('/map')]
     function map (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
-        return $this->render('mj/map.html.twig', [
+        return $this->render('player/map.html.twig', [
             'pnjs' => $PNJRepository->findAll(),
             'players' => $playerRepository->findAll()
         ]);

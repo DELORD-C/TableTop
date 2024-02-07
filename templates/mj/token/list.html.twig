@@ -17,7 +17,7 @@
                         <td><img alt="token" class="token" src="{{ asset('build/uploads/' ~ token.image) }}"></td>
                         <td><p>{{ token.name }}</p></td>
                         <td>
-                            <a href="{{ path('app_token_delete', {'token': token.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ token.name}} ?'))">Supprimer</a>
+                            <a href="{{ path('app_mj_token_delete', {'token': token.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ token.name}} ?'))">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}

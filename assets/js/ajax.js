@@ -141,6 +141,10 @@ if (updateButtons.length > 0) {
 
                 let percent = 100 - Math.round((actual + op) * 100 / max);
 
+                if (percent > 100) {
+                    percent = 100;
+                }
+
                 container.querySelector('.mask').style.height = percent + '%';
 
                 span.innerHTML = (actual + op).toString();

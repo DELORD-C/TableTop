@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Player;
-use App\Entity\PNJ;
 use App\Service\CustomSerializer;
 use App\Service\FightSetter;
 use Doctrine\ORM\EntityManagerInterface;

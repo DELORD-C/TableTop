@@ -17,9 +17,9 @@
                         <td><img alt="token" class="token" src="{{ asset('build/uploads/' ~ pnj.token.image) }}"></td>
                         <td><p>{{ pnj.name }}</p></td>
                         <td>
-                            <a href="{{ path('app_pnj_edit', {'pnj': pnj.id}) }}" class="btn btn-primary">Voir</a>
-                            <a href="{{ path('app_pnj_duplicate', {'pnj': pnj.id}) }}" class="btn btn-primary">Dupliquer</a>
-                            <a href="{{ path('app_pnj_delete', {'pnj': pnj.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ pnj.name}} ?'))">Supprimer</a>
+                            <a href="{{ path('app_mj_pnj_edit', {'pnj': pnj.id}) }}" class="btn btn-primary">Voir</a>
+                            <a href="{{ path('app_mj_pnj_duplicate', {'pnj': pnj.id}) }}" class="btn btn-primary">Dupliquer</a>
+                            <a href="{{ path('app_mj_pnj_delete', {'pnj': pnj.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer {{ pnj.name}} ?'))">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
