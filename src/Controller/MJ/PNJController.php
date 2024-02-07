@@ -64,7 +64,7 @@ class PNJController extends AbstractController
             return $this->redirectToRoute('app_mj_pnj_list');
         }
 
-        return $this->render('mj/pnj/edit.html.twig', [
+        return $this->render('mj/PNJ/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

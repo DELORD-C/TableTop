@@ -115,7 +115,14 @@ function nextTurn() {
 function sortTimeline() {
     let entities = document.querySelectorAll(".fight-container > .entity-list > div");
     for (let entity of entities) {
-        while (entity.previousElementSibling && entity.dataset.speed > entity.previousElementSibling.dataset.speed) {
+        while (
+            entity.previousElementSibling && (
+                entity.dataset.speed > entity.previousElementSibling.dataset.speed || (
+                    entity.dataset.speed === entity.previousElementSibling.dataset.speed &&
+                    parseInt(entity.getAttribute('id')) < parseInt(entity.previousElementSibling.getAttribute('id'))
+                )
+            )
+        ) {
             entity.after(entity.previousElementSibling);
         }
     }

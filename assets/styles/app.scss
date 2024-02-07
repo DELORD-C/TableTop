@@ -301,3 +301,7 @@ table {
     }
   }
 }
+
+.nav-link.active {
+  background-color: $dark1;
+}

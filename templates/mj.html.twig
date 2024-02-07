@@ -10,46 +10,46 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Partie</div>
-                        <a class="nav-link" href="{{ path('app_mj_game_fight') }}">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_mj_game_fight' %} active{% endif %}" href="{{ path('app_mj_game_fight') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-shield"></i></div>
                             Combat
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseJoueurs" aria-expanded="false" aria-controls="collapseJoueurs">
+                        <a class="nav-link collapsed{% if app.request.attributes.get( '_route' ) starts with 'app_mj_player' %} active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseJoueurs" aria-expanded="false" aria-controls="collapseJoueurs">
                             <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
                             Joueurs
                             <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
                         </a>
                         <div class="collapse" id="collapseJoueurs" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ path('app_mj_player_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
-                                <a class="nav-link" href="{{ path('app_mj_player_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_player_create' %} active{% endif %}" href="{{ path('app_mj_player_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_player_list' %} active{% endif %}" href="{{ path('app_mj_player_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePNJ" aria-expanded="false" aria-controls="collapsePNJ">
+                        <a class="nav-link collapsed{% if app.request.attributes.get( '_route' ) starts with 'app_mj_pnj' %} active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePNJ" aria-expanded="false" aria-controls="collapsePNJ">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             PNJ
                             <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
                         </a>
                         <div class="collapse" id="collapsePNJ" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ path('app_mj_pnj_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
-                                <a class="nav-link" href="{{ path('app_mj_pnj_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_pnj_create' %} active{% endif %}" href="{{ path('app_mj_pnj_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_pnj_list' %} active{% endif %}" href="{{ path('app_mj_pnj_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
                             </nav>
                         </div>
-                        <a class="nav-link" href="{{ path('app_game_inventory') }}">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_game_inventory' %} active{% endif %}" href="{{ path('app_game_inventory') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-handbag-fill"></i></div>
                             Inventaire
                         </a>
-                        <a class="nav-link" href="{{ path('app_game_notes') }}">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_game_notes' %} active{% endif %}" href="{{ path('app_game_notes') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
                             Notes
                         </a>
-                        <a class="nav-link" href="{{ path('app_mj_game_map') }}">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_mj_game_map' %} active{% endif %}" href="{{ path('app_mj_game_map') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-map-fill"></i></div>
                             Map
                         </a>
                         <div class="sb-sidenav-menu-heading">Outils</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseToken" aria-expanded="false" aria-controls="collapseToken">
+                        <a class="nav-link collapsed{% if app.request.attributes.get( '_route' ) starts with 'app_mj_token' %} active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseToken" aria-expanded="false" aria-controls="collapseToken">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-chess-knight"></i></div>
                             Tokens
                             <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
@@ -57,8 +57,8 @@
                         <div class="collapse" id="collapseToken" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" target="_blank" href="https://tools.2minutetabletop.com"><div class="sb-nav-link-icon"><i class="fa-solid fa-chess-knight"></i></div>Edition</a>
-                                <a class="nav-link" href="{{ path('app_mj_token_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
-                                <a class="nav-link" href="{{ path('app_mj_token_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_token_create' %} active{% endif %}" href="{{ path('app_mj_token_create') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>Création</a>
+                                <a class="nav-link{% if app.request.get('_route') == 'app_mj_token_list' %} active{% endif %}" href="{{ path('app_mj_token_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
                             </nav>
                         </div>
                         <a class="nav-link" href="#" id="dice-btn">

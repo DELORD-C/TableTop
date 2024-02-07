@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DataClass\PlayerClass;
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -106,21 +107,7 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct() {
         $this->isPlaying = 0;
         $this->isFighting = 0;
-        $this->PVM = 10;
-        $this->PV = 10;
-        $this->PCM = 1;
-        $this->PC = 1;
-        $this->PMM = 0;
-        $this->PM = 0;
-        $this->PD = 1;
-        $this->lvl = 1;
-        $this->dmg_dice = 1;
-        $this->dmg_fixed = 0;
-        $this->strength = 10;
-        $this->intel = 10;
-        $this->social = 10;
-        $this->perception = 10;
-        $this->speed = 10;
+        PlayerClass::setDefaultStats($this);
     }
 
     public function getId(): ?int
