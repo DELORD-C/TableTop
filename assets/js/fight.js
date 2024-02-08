@@ -117,9 +117,16 @@ function sortTimeline() {
     for (let entity of entities) {
         while (
             entity.previousElementSibling && (
-                entity.dataset.speed > entity.previousElementSibling.dataset.speed || (
+                entity.dataset.speed > entity.previousElementSibling.dataset.speed ||
+                (
+                    entity.getAttribute('type') === entity.previousElementSibling.getAttribute('type') &&
                     entity.dataset.speed === entity.previousElementSibling.dataset.speed &&
                     parseInt(entity.getAttribute('id')) < parseInt(entity.previousElementSibling.getAttribute('id'))
+                ) ||
+                (
+                    entity.dataset.speed === entity.previousElementSibling.dataset.speed &&
+                    entity.getAttribute('type') === 'player' &&
+                    entity.previousElementSibling.getAttribute('type') === 'pnj'
                 )
             )
         ) {
