@@ -15,22 +15,34 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    document.querySelector(".next-turn").addEventListener("click", nextTurn);
-    document.querySelector(".sort-btn").addEventListener("click", sortTimeline);
+    if (document.querySelector(".next-turn")) {
+        document.querySelector(".next-turn").addEventListener("click", nextTurn);
+        window.addEventListener('keypress', (e) => {
+            if (e.key === ' ') {
+                nextTurn();
+            }
+        })
+    }
+
+    if (document.querySelector(".sort-btn")) {
+        document.querySelector(".sort-btn").addEventListener("click", sortTimeline);
+    }
 
     //Init sortableJs
     let timeline = document.getElementById("timeline");
-    Sortable.create(timeline, {
-        group: {
-            name: 'timeline',
-            pull: true,
-            sort: true,
-            direction: 'horizontal'
-        },
-        animation: 100
-    });
+    if (timeline) {
+        Sortable.create(timeline, {
+            group: {
+                name: 'timeline',
+                pull: true,
+                sort: true,
+                direction: 'horizontal'
+            },
+            animation: 100
+        });
 
-    sortTimeline();
+        sortTimeline();
+    }
 });
 
 function toggleFight(entityCard) {

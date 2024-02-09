@@ -47,9 +47,13 @@ class PNJ
     #[ORM\Column]
     private ?bool $isPlaying = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $hit = null;
+
     public function __construct() {
         $this->isPlaying = 0;
         $this->isFighting = 0;
+        $this->hit = 50;
     }
 
     public function getId(): ?int
@@ -190,6 +194,18 @@ class PNJ
     public function setIsPlaying(bool $isPlaying): self
     {
         $this->isPlaying = $isPlaying;
+
+        return $this;
+    }
+
+    public function getHit(): ?int
+    {
+        return $this->hit;
+    }
+
+    public function setHit(?int $hit): static
+    {
+        $this->hit = $hit;
 
         return $this;
     }

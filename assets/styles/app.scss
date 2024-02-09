@@ -305,3 +305,48 @@ table {
 .nav-link.active {
   background-color: $dark1;
 }
+
+.input-group-append > button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.table th {
+  color: #f0f0f0;
+}
+
+.category > div {
+  background: rgb(35, 35, 35);
+}
+
+.btn-darker, .bg-darker {
+  background: #1a1d21;
+  color: #fff;
+  border: 1px solid #232323;
+}
+
+.border-darker {
+  border: solid 1px #272727!important;
+}
+
+.form-floating label::after {
+  background-color: transparent!important;
+}
+
+.form-floating label::placeholder {
+  color: #fff;
+}
+
+input:focus + label {
+  color: orange;
+}
+
+.form-control:focus + .form-label {
+  color: red;
+}
+
+@media screen and (max-width: 800px) {
+  .col-6 {
+    width: 100%;
+  }
+}

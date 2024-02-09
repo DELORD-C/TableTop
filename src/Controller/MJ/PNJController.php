@@ -52,7 +52,7 @@ class PNJController extends AbstractController
     {
         $form = $this->createForm(PNJType::class, $pnj, ['attr' => [
             'class' => 'api-form',
-            'update' => '/pnj/get/' . $pnj->getId()
+            'update' => 'pnj/' . $pnj->getId()
         ]]);
 
         $form->handleRequest($request);

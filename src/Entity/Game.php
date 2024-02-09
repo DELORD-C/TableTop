@@ -6,7 +6,6 @@ use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
@@ -18,9 +17,6 @@ class Game
 
     #[ORM\Column(length: 90000, nullable: true)]
     private ?string $notes = null;
-
-    #[ORM\Column(length: 90000, nullable: true)]
-    private ?string $inventory = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $map = null;
@@ -39,6 +35,9 @@ class Game
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    #[ORM\OneToOne(mappedBy: 'game', cascade: ['persist', 'remove'])]
+    private ?Inventory $inventory = null;
 
     public function __construct()
     {
@@ -64,17 +63,6 @@ class Game
         return $this;
     }
 
-    public function getInventory(): ?string
-    {
-        return $this->inventory;
-    }
-
-    public function setInventory(string $inventory): self
-    {
-        $this->inventory = $inventory;
-
-        return $this;
-    }
 
     public function getMap(): ?string
     {
@@ -198,6 +186,23 @@ class Game
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getInventory(): ?Inventory
+    {
+        return $this->inventory;
+    }
+
+    public function setInventory(Inventory $inventory): static
+    {
+        // set the owning side of the relation if necessary
+        if ($inventory->getGame() !== $this) {
+            $inventory->setGame($this);
+        }
+
+        $this->inventory = $inventory;
 
         return $this;
     }

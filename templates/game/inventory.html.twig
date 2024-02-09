@@ -1,0 +1,44 @@
+{% extends 'mj.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        <h1 class="mb-3">{{ title }}</h1>
+        <div class="container-fluid row row-cols-4 g-3" style="height: calc(100vh - 220px); overflow: scroll" id="categories">
+            {% for category in inventory.categories %}
+                <div class="col col-6 category" data-id="{{ category.id }}">
+                    <div class="border border-darker rounded">
+                        <div class="input-group d-flex justify-content-between">
+                            <input class="form-control border-0 categoryName" style="font-size: 24px" value="{{ category.name }}">
+                            <button class="btn btn-darker rounded-0 deleteCategoryBtn" style="max-width: 55px;"><i class="bi-trash"></i></button>
+                        </div>
+                        <ul class="list-group">
+                            {% for item in category.items %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center input-group bg-transparent border-darker item p-0 rounded-0 border-start-0 border-end-0" data-id="{{ item.id }}">
+                                    <input class="form-control border-0 itemName" value="{{ item.name }}">
+                                    <button class="input-group-text border-0 bg-darker text-light removeQuantity">-</button>
+                                    <input class="form-control border-0 itemCount" value="{{ item.count }}" type="text" style="max-width: 55px;">
+                                    <button class="input-group-text border-0 bg-darker text-light addQuantity">+</button>
+                                    <button class="input-group-text border-0 bg-danger text-light rounded-0 deleteItemBtn"><i class="bi-trash"></i></button>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center input-group bg-transparent border-darker p-0 rounded-0 border-bottom-0 border-end-0 border-start-0">
+                                <input class="form-control border-0 newItem" placeholder="Nouvel objet" aria-label="Nouvel objet">
+                                <div class="input-group-append ">
+                                    <button class="btn btn-darker rounded-0 newItemBtn" type="button">Ajouter</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col col-12" id="lastCategory">
+                <div class="input-group">
+                    <input class="form-control border-secondary" id="newCategory" placeholder="Nouvelle catégorie" aria-label="Nouvelle catégorie">
+                    <div class="input-group-append">
+                        <button class="btn btn-darker border-secondary" id="newCategoryBtn" type="button">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

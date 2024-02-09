@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class GameController extends AbstractController
 {
@@ -68,27 +69,17 @@ class GameController extends AbstractController
     }
 
     #[Route('/inventory')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function inventory(Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(InventoryType::class, $this->getUser()->getGame(), ['attr' => [
-            'class' => 'api-form form-full',
-            'update' => 'game'
-        ]]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            return $this->redirectToRoute("app_game_inventory");
-        }
-
-        return $this->render('mj/form.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('game/inventory.html.twig', [
+            'inventory' => $this->getUser()->getGame()->getInventory(),
             'title' => 'Inventaire'
         ]);
     }
 
     #[Route('/notes')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function notes(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(NotesType::class, $this->getUser()->getGame(), ['attr' => [
@@ -110,6 +101,7 @@ class GameController extends AbstractController
     }
 
     #[Route('/fight')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function fight (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
         return $this->render('player/fight.html.twig', [
@@ -119,6 +111,7 @@ class GameController extends AbstractController
     }
 
     #[Route('/map')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function map (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
         return $this->render('player/map.html.twig', [

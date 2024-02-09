@@ -142,6 +142,8 @@ class PlayerEditType extends AbstractType
                 'label' => 'Force',
                 'attr' => [
                     'placeholder' => 'Force',
+                    'min' => 0,
+                    'max' => 100
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -151,6 +153,8 @@ class PlayerEditType extends AbstractType
                 'label' => 'Intelligence',
                 'attr' => [
                     'placeholder' => 'Intelligence',
+                    'min' => 0,
+                    'max' => 100
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -160,6 +164,8 @@ class PlayerEditType extends AbstractType
                 'label' => 'Social',
                 'attr' => [
                     'placeholder' => 'Social',
+                    'min' => 0,
+                    'max' => 100
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -169,6 +175,8 @@ class PlayerEditType extends AbstractType
                 'label' => 'Perception',
                 'attr' => [
                     'placeholder' => 'Perception',
+                    'min' => 0,
+                    'max' => 100
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -178,6 +186,8 @@ class PlayerEditType extends AbstractType
                 'label' => 'Initiative',
                 'attr' => [
                     'placeholder' => 'Initiative',
+                    'min' => 0,
+                    'max' => 100
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
