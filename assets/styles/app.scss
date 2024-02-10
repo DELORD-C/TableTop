@@ -333,16 +333,23 @@ table {
   background-color: transparent!important;
 }
 
-.form-floating label::placeholder {
+.form-floating label {
+  color: #fff!important;
+}
+
+.stats td {
   color: #fff;
+  opacity: 0.65;
 }
 
-input:focus + label {
-  color: orange;
+.nav-link {
+  cursor: pointer;
+  user-select: none;
 }
 
-.form-control:focus + .form-label {
-  color: red;
+.sb-nav-link-icon img {
+  filter: invert(1) brightness(0.7);
+  width: 14px;
 }
 
 @media screen and (max-width: 800px) {

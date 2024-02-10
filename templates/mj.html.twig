@@ -61,10 +61,24 @@
                                 <a class="nav-link{% if app.request.get('_route') == 'app_mj_token_list' %} active{% endif %}" href="{{ path('app_mj_token_list') }}"><div class="sb-nav-link-icon"><i class="bi bi-person-lines-fill"></i></div>Liste</a>
                             </nav>
                         </div>
-                        <a class="nav-link" href="#" id="dice-btn">
-                            <div class="sb-nav-link-icon"><i class="bi bi-dice-6-fill"></i></div>
+
+                        <span class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDices" aria-expanded="false" aria-controls="collapseDices">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-dice"></i></div>
                             Dés
-                        </a>
+                            <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
+                        </span>
+                        <div class="collapse" id="collapseDices" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <span id="dice-btn-2" class="nav-link"><div class="sb-nav-link-icon"><i class="bi bi-coin"></i></div>1D2</span>
+                                <span id="dice-btn-3" class="nav-link"><div class="sb-nav-link-icon"><i class="bi bi-dice-3"></i></div>1D3</span>
+                                <span id="dice-btn-4" class="nav-link"><div class="sb-nav-link-icon"><i class="bi bi-dice-4"></i></div>1D4</span>
+                                <span id="dice-btn-6" class="nav-link"><div class="sb-nav-link-icon"><i class="bi bi-dice-6"></i></div>1D6</span>
+                                <span id="dice-btn-10" class="nav-link"><div class="sb-nav-link-icon"><img src="{{ asset('build/medias/d10.png') }}"></div>1D10</span>
+                                <span id="dice-btn-20" class="nav-link"><div class="sb-nav-link-icon"><img src="{{ asset('build/medias/d20.png') }}"></div>1D20</span>
+                                <span id="dice-btn-100" class="nav-link"><div class="sb-nav-link-icon"><img src="{{ asset('build/medias/d100.png') }}"></div>1D100</span>
+                            </nav>
+                        </div>
+
                         <a class="nav-link" target="_blank" href="https://tools.2minutetabletop.com/token-editor/encounter">
                             <div class="sb-nav-link-icon"><i class="bi bi-shuffle"></i></div>
                             Rencontres
