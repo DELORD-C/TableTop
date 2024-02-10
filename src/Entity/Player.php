@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\DataClass\PlayerClass;
 use App\Repository\PlayerRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -61,13 +62,13 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $lvl = null;
 
-    #[ORM\Column(length: 90000, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $lore = null;
 
-    #[ORM\Column(length: 90000, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $activ = null;
 
-    #[ORM\Column(length: 90000, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $passiv = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -438,7 +439,7 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

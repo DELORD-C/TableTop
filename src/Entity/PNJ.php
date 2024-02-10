@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PNJRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PNJRepository::class)]
@@ -19,7 +20,7 @@ class PNJ
     #[ORM\Column(nullable: true)]
     private ?int $PV = null;
 
-    #[ORM\Column(length: 90000, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = null;
 
     #[ORM\Column(nullable: true)]

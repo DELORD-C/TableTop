@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
@@ -15,7 +16,7 @@ class Game
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 90000, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
     #[ORM\Column(length: 255, nullable: true)]
