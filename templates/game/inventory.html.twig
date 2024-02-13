@@ -2,7 +2,14 @@
 
 {% block main %}
     <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
-        <h1 class="mb-3">{{ title }}</h1>
+        <div class="row mb-3">
+            <h1 class="col">{{ title }}</h1>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+            <i class="fa-solid fa-coins" style="margin-right: -25px"></i>
+            <input class="col form-control border-secondary" style="padding-left: 30px" id="gold" type="number" placeholder="PO" value="{{ inventory.money }}" aria-label="Pièces d'or">
+        </div>
+
         <div class="container-fluid row row-cols-4 g-3" style="height: calc(100vh - 220px); overflow: scroll" id="categories">
             {% for category in inventory.categories %}
                 <div class="col col-6 category" data-id="{{ category.id }}">

@@ -64,7 +64,7 @@ table {
 
 .textarea-full {
   width: 100%;
-  height: calc(100vh - 260px)!important;
+    height: calc(100vh - 260px)!important;
 }
 
 .form-full {
@@ -350,6 +350,90 @@ table {
 .sb-nav-link-icon img {
   filter: invert(1) brightness(0.7);
   width: 14px;
+}
+
+.map {
+  display: flex;
+  align-items: center;
+
+  #map-inner {
+    position: relative;
+    overflow: hidden;
+    min-width: 100px;
+    min-height: 100px;
+
+    img {
+      width: 100%;
+      max-height: calc(100vh - 125px);
+    }
+  }
+}
+
+.map-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 70px;
+  width: 70px;
+  button {
+    position: absolute;
+    z-index: 1;
+    border: none;
+    border-radius: 50%;
+    background-color: #1a1e21;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #282e33;
+      transform: scale(1.2);
+    }
+
+    &#map-edit {
+      left: 10px;
+      top: 6px;
+    }
+
+    &#map-new {
+      right: 6px;
+      bottom: 10px;
+    }
+  }
+}
+
+.map-controls-bg {
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+  background-color: rgb(30 30 30 / 90%);
+  top: -70px;
+  position: absolute;
+}
+
+#map-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  background: #1e1e1e;
+  flex-flow: column;
+  max-height: calc(100vh - 125px);
+  z-index: 1;
+}
+
+.map-pin {
+  position: absolute;
+  font-size: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+
+
+  &:hover {
+    transform: scale(1.2) translateY(-5%);
+  }
 }
 
 @media screen and (max-width: 800px) {

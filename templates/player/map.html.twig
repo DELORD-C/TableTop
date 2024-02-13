@@ -1,0 +1,10 @@
+{% extends 'mj.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        {% if (app.user.game.map == null) %}
+            <h1>La map n'a pas encore été configurée.</h1>
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %}

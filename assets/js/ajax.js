@@ -380,3 +380,44 @@ function changeCount(amount, button) {
         updateItem(button.parentElement);
     }, 100);
 }
+
+let gold = document.getElementById("gold");
+if (gold) {
+    gold.addEventListener('keydown', (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            updateGold(gold.value);
+        }, 100);
+    })
+
+    setInterval(function () {
+        fetch('/api/gold/get')
+            .then(function (response) {
+                if (response.status === 200) {
+                    response.json()
+                        .then(function (value) {
+                            gold.value = value;
+                        });
+                }
+                else {
+                    response.json()
+                        .then(response => console.log(response));
+                }
+            });
+    }, 1000)
+}
+
+function updateGold(value) {
+    if (value.length > 0) {
+        fetch('/api/gold/update/' + value)
+            .then(function (response) {
+                if (response.status === 200) {
+                    validate();
+                } else {
+                    response.json()
+                        .then(response => console.log(response));
+                }
+            });
+    }
+}
+

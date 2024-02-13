@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Inventory\Category;
 use App\Entity\Inventory\Item;
+use App\Entity\Pin;
 use App\Entity\Player;
 use App\Entity\PNJ;
 use App\Service\CustomSerializer;
@@ -132,5 +133,29 @@ class ApiController extends AbstractController
         $em->persist($item);
         $em->flush();
         return $this->json(true);
+    }
+
+    #[Route('/gold/update/{amount}')]
+    public function updateGold(int $amount, EntityManagerInterface $em): Response
+    {
+        $this->getUser()->getGame()->getInventory()->setMoney($amount);
+        $em->flush();
+        return $this->json(true);
+    }
+
+    #[Route('/gold/get')]
+    public function getGold(): Response
+    {
+        return $this->json($this->getUser()->getGame()->getInventory()->getMoney());
+    }
+
+    #[Route('/pin/new')]
+    public function newPin(EntityManagerInterface $em, CustomSerializer $serializer): Response
+    {
+        $pin = new Pin();
+        $pin->setGame($this->getUser()->getGame());
+        $em->persist($pin);
+        $em->flush();
+        return $this->json($serializer->serialize($pin));
     }
 }

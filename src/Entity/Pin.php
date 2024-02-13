@@ -19,7 +19,7 @@ class Pin
     #[ORM\Column]
     private ?float $y = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
@@ -28,6 +28,18 @@ class Pin
     #[ORM\ManyToOne(inversedBy: 'pins')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Game $game = null;
+
+    #[ORM\Column]
+    private ?bool $team = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
+    function __construct () {
+        $this->x = 50;
+        $this->y = 50;
+        $this->team = false;
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +102,30 @@ class Pin
     public function setGame(?Game $game): self
     {
         $this->game = $game;
+
+        return $this;
+    }
+
+    public function isTeam(): ?bool
+    {
+        return $this->team;
+    }
+
+    public function setTeam(bool $team): static
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): static
+    {
+        $this->color = $color;
 
         return $this;
     }

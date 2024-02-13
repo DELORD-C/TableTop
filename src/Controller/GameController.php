@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Entity\Inventory;
 use App\Entity\Player;
 use App\Form\GameType;
 use App\Form\InventoryType;
@@ -18,6 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 
 class GameController extends AbstractController
 {
@@ -55,12 +60,15 @@ class GameController extends AbstractController
             $game->setName($form->get('game')->getData());
             $game->setPassword($form->get('game_password')->getData());
             $player->setGame($game);
+            $inventory = new Inventory();
+            $inventory->setGame($game);
+            $entityManager->persist($inventory);
             $entityManager->persist($player);
             $entityManager->persist($game);
             $tokenCreator->createBaseTokens();
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_default_home');
+            return $this->redirectToRoute('app_player_login');
         }
 
         return $this->render('game/create.html.twig', [

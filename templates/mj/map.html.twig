@@ -1,0 +1,28 @@
+{% extends 'player.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        {% if (app.user.game.map == null) %}
+            <h1>Uploader une map</h1>
+            {{ form(form) }}
+        {% else %}
+            <div class="map">
+                <div id="map-inner">
+                    <div class="map-controls">
+                        <div class="map-controls-bg"></div>
+                        <button id="map-edit"><i class="bi bi-pencil-square"></i></button>
+                        <button id="map-new"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                    {% for pin in app.user.game.pins %}
+                        <i class="bi bi-geo-{% if pin.team %}alt-{% endif %}fill map-pin" id="pin{{ pin.id }}" style="left: {{ pin.x }}%; top: {{ pin.y }}%" data-id="{{ pin.id }}" data-name="{{ pin.name }}" data-note="{{ pin.note }}" data-team="{{ pin.team }}" data-color="{{ pin.color }}"></i>
+                    {% endfor %}
+                    <img src="{{ asset('build/uploads/' ~ app.user.game.map) }}">
+                </div>
+            </div>
+            <div id="map-popup">
+                <h1>Uploader une autre map</h1>
+                {{ form(form) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

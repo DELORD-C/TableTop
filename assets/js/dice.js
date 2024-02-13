@@ -27,7 +27,7 @@ function rollDice (dice) {
     document.getElementById('dice-result').innerHTML = '';
     document.getElementById("dice-result").style.color = 'unset';
 
-    let audio = new Audio(diceSound);
+    let audio = new Audio('/assets/themes/dice.mp3');
     audio.play();
 
     diceBox.roll([dice]).then((results) => {

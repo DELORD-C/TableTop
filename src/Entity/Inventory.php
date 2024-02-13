@@ -23,12 +23,13 @@ class Inventory
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Game $game = null;
 
-    #[ORM\OneToMany(mappedBy: 'inventory', targetEntity: Category::class)]
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'inventory')]
     private Collection $categories;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->money = 0;
     }
 
     public function getId(): ?int
