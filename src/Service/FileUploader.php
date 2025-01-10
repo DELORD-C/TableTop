@@ -23,7 +23,7 @@ class FileUploader
                 $this->fs->remove($this->getTargetDirectory().'/'.$oldFile);
             }
         } catch (FileException $e) {
-            throw new FileException("Impossible de déplacer le fichier.");
+            throw new FileException($e);
         }
 
         return $fileName;
