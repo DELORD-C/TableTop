@@ -38,7 +38,7 @@ web:
 
 mounts:
     "/var": { source: local, source_path: var }
-    
+    "/app/public/build/uploads": { source: local, source_path: uploads }
 
 relationships:
     database: "database:mysql"
