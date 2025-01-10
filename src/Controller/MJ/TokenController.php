@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/token')]
+#[Route('/mj/token')]
+#[IsGranted('ROLE_MJ')]
 class TokenController extends AbstractController
 {
     #[Route('/create')]
@@ -40,7 +42,7 @@ class TokenController extends AbstractController
             $em->persist($token);
             $em->flush();
 
-            return $this->redirectToRoute('app_token_list');
+            return $this->redirectToRoute('app_mj_token_list');
         }
 
         return $this->render('mj/token/create.html.twig', [
@@ -64,6 +66,6 @@ class TokenController extends AbstractController
         $em->remove($token);
         $em->flush();
 
-        return $this->redirectToRoute('app_token_list');
+        return $this->redirectToRoute('app_mj_token_list');
     }
 }

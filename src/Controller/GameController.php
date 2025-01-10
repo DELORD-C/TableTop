@@ -27,6 +27,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge
 class GameController extends AbstractController
 {
     #[Route('/game/delete/{game}')]
+    #[IsGranted('ROLE_MJ')]
     function delete (Game $game, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($game);
@@ -80,7 +81,14 @@ class GameController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function inventory(Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('game/inventory.html.twig', [
+        if ($this->isGranted('ROLE_MJ')) {
+            $template = 'mj/inventory.html.twig';
+        }
+        else {
+            $template = 'player/inventory.html.twig';
+        }
+
+        return $this->render($template, [
             'inventory' => $this->getUser()->getGame()->getInventory(),
             'title' => 'Inventaire'
         ]);
@@ -102,7 +110,14 @@ class GameController extends AbstractController
             return $this->redirectToRoute("app_game_notes");
         }
 
-        return $this->render('mj/form.html.twig', [
+        if ($this->isGranted('ROLE_MJ')) {
+            $template = 'mj/form.html.twig';
+        }
+        else {
+            $template = 'player/form.html.twig';
+        }
+
+        return $this->render($template, [
             'form' => $form->createView(),
             'title' => 'Notes'
         ]);
@@ -112,7 +127,13 @@ class GameController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function fight (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
-        return $this->render('player/fight.html.twig', [
+        if ($this->isGranted('ROLE_MJ')) {
+            $template = 'mj/fight.html.twig';
+        }
+        else {
+            $template = 'player/fight.html.twig';
+        }
+        return $this->render($template, [
             'pnjs' => $PNJRepository->findAll(),
             'players' => $playerRepository->findAll()
         ]);
@@ -122,7 +143,14 @@ class GameController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function map (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {
-        return $this->render('player/map.html.twig', [
+        if ($this->isGranted('ROLE_MJ')) {
+            $template = 'mj/map.html.twig';
+        }
+        else {
+            $template = 'player/map.html.twig';
+        }
+
+        return $this->render($template, [
             'pnjs' => $PNJRepository->findAll(),
             'players' => $playerRepository->findAll()
         ]);

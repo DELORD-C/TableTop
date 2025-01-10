@@ -10,7 +10,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Partie</div>
-                        <a class="nav-link{% if app.request.get('_route') == 'app_mj_game_fight' %} active{% endif %}" href="{{ path('app_mj_game_fight') }}">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_game_fight' %} active{% endif %}" href="{{ path('app_game_fight') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-shield"></i></div>
                             Combat
                         </a>
@@ -92,8 +92,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    {{ app.user.username }}
-                    {% if is_granted('ROLE_MJ') %} (MJ) {% endif %}
+                    {{ app.user.username }} (MJ)
                 </div>
             </nav>
         </div>

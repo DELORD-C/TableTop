@@ -1,0 +1,25 @@
+<div class="entity-card pnj-card{% if pnj.isPlaying %} playing{% endif %}" type="pnj" data-speed="{{ pnj.speed }}" id="{{ pnj.id }}">
+    <div class="card text-white shadow-sm">
+        <div class="card-body">
+            <div>
+                <div class="card-title d-flex justify-content-between align-items-center mb-1">
+                    <h6 class="text-center">{{ pnj.name }}</h6>
+                </div>
+                <div class="char-main updatable-object" type="PNJ">
+                    <img src="{{ asset('build/uploads/' ~ pnj.token.image) }}">
+                    <div class="char-controls">
+                        <div class="stat-controls" stat="PV" type="PNJ" max="{{ pnj.PVM }}" id="{{ pnj.id }}">
+                            <div></div>
+                            <p>
+                                <i class="bi bi-heart-fill" style="color: red"></i>
+                                <i class="mask" style="height: {% if pnj.PVM > 0 %}{{ 100 - (pnj.PV * 100 / pnj.PVM) }}{% else %}0{% endif %}%"></i>
+                                <span class="updatable-stat" stat="PV">{{ pnj.PV }}</span>
+                            </p>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

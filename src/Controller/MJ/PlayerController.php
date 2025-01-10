@@ -16,11 +16,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/mj')]
-#[IsGranted('ROLE_MJ')]
+#[Route('/mj/player')]
 class PlayerController extends AbstractController
 {
-    #[Route('/player/create')]
+    #[Route('/create')]
+    #[IsGranted('ROLE_MJ')]
     function create (
         Request $request,
         EntityManagerInterface $em,
@@ -54,7 +54,8 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/player/list')]
+    #[Route('/list')]
+    #[IsGranted('ROLE_MJ')]
     function list (PlayerRepository $rep): Response
     {
         $players = $rep->findAll();
@@ -63,9 +64,12 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/player/edit/{player}')]
+    #[Route('/edit/{player}')]
     function edit (Player $player, EntityManagerInterface $em, Request $request): RedirectResponse|Response
     {
+        if ($this->getUser()->getId() !== $player->getId()) {
+            $this->denyAccessUnlessGranted('ROLE_MJ');
+        }
         $form = $this->createForm(PlayerEditType::class, $player, ['attr' => [
             'class' => 'api-form',
             'update' => 'player/' . $player->getId()
@@ -77,7 +81,6 @@ class PlayerController extends AbstractController
             $player = $form->getData();
             $em->persist($player);
             $em->flush();
-            return $this->redirectToRoute('app_mj_player_list');
         }
 
         return $this->render('mj/player/edit.html.twig', [
@@ -85,7 +88,8 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/player/delete/{player}')]
+    #[Route('/delete/{player}')]
+    #[IsGranted('ROLE_MJ')]
     function delete (Player $player, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($player);

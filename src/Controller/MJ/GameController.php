@@ -18,15 +18,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_MJ')]
 class GameController extends AbstractController
 {
-    #[Route('/fight')]
-    function fight (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
-    {
-        return $this->render('mj/fight.html.twig', [
-            'pnjs' => $PNJRepository->findBy(['game' => $this->getUser()->getGame()]),
-            'players' => $playerRepository->findBy(['game' => $this->getUser()->getGame()])
-        ]);
-    }
-
     #[Route('/map')]
     function map (Request $request, EntityManagerInterface $em, FileUploader $uploader): Response
     {
@@ -37,7 +28,6 @@ class GameController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('map')->getData();
-            dump($form->get('map')->getData());
             $this->getUser()->getGame()->setMap($uploader->upload($image, $this->getUser()->getGame()->getMap()));
             $em->flush();
             return $this->redirectToRoute('app_mj_game_map');

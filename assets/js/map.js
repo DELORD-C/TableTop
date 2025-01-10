@@ -15,7 +15,7 @@ function initMap () {
     pins = document.getElementsByClassName('map-pin');
     mapBg = document.getElementById('map-bg');
 
-    if (mapEdit) {
+    if (mapBg) {
         mapEdit.addEventListener('click', displayMapForm);
         mapNew.addEventListener('click', addNewPin);
 

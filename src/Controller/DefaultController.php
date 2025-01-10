@@ -11,11 +11,6 @@ class DefaultController extends AbstractController
     #[Route('/')]
     function home (): Response
     {
-        if ($this->isGranted('ROLE_MJ')) {
-            return $this->redirectToRoute('app_mj_game_fight');
-        }
-        else {
-            return $this->redirectToRoute('app_game_fight');
-        }
+        return $this->redirectToRoute('app_game_fight');
     }
 }

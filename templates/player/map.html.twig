@@ -1,10 +1,28 @@
-{% extends 'mj.html.twig' %}
+{% extends 'player.html.twig' %}
 
 {% block main %}
-    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+    <div class="container-fluid d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
         {% if (app.user.game.map == null) %}
-            <h1>La map n'a pas encore été configurée.</h1>
+            <h1>Aucune map actuellement</h1>
         {% else %}
+            <div class="map">
+                <div id="map-inner">
+                    <div class="map-controls">
+                        <div class="map-controls-bg"></div>
+                        <div id="map-edit"></div>
+                        <button id="map-new"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                    {% for pin in app.user.game.pins %}
+                        <i class="bi bi-geo-alt-fill map-pin" draggable="true" id="pin{{ pin.id }}" style="left: {{ pin.x }}%; top: {{ pin.y }}%{% if pin.color %}; color: {{ pin.color }}{% endif %}" data-id="{{ pin.id }}" data-name="{{ pin.name }}" data-note="{{ pin.note }}"></i>
+                    {% endfor %}
+                    <img id="map-bg" alt="Map" src="{{ asset('build/uploads/' ~ app.user.game.map) }}">
+                </div>
+            </div>
+            <div id="pin-popup">
+                {{ form(pinForm) }}
+                <button id="pin-delete" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+            </div>
+            <div id="map-popup"></div>
         {% endif %}
     </div>
 {% endblock %}

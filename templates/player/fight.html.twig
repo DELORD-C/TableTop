@@ -1,0 +1,34 @@
+{% extends 'player.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Combat</h1>
+        <div class="row">
+            <div class="col">
+                <div class="card mb-4 timeline">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        Timeline
+                    </div>
+                    <div class="card-body entity-container fight-container">
+                        <div class="row overflow-x entity-list" id="timeline-player">
+                            {% for player in players %}
+                                {% if 'ROLE_MJ' not in player.roles and player.isFighting %}
+                                    {% include 'includes/_player-card-off.html.twig' with { player: player} %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for pnj in pnjs %}
+                                {% if pnj.isFighting %}
+                                    {% include 'includes/_pnj-card-off.html.twig' with { pnj: pnj} %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.setTimeout(function(){ document.location.reload(); }, 15000);
+    </script>
+{% endblock %}

@@ -1,0 +1,57 @@
+<div class="entity-card player-card{% if player.isPlaying %} playing{% endif %}" type="player" data-speed="{{ player.speed }}" id="{{ player.id }}">
+    <div class="card text-white shadow-sm">
+        <div class="card-body">
+            <div>
+                <div class="card-title d-flex justify-content-between align-items-center mb-1">
+                    <h6 class="text-center">{{ player.username }} {{ player.name }}</h6>
+                </div>
+                <div class="char-main updatable-object" type="player">
+                    <img src="{{ asset('build/uploads/' ~ player.token.image) }}">
+                    <div class="char-controls">
+                        <div class="stat-controls" stat="PV" type="Player" max="{{ player.PVM }}" id="{{ player.id }}">
+                            <div></div>
+                            <p>
+                                <i class="bi bi-heart-fill" style="color: red"></i>
+                                <i class="mask" style="height: {% if player.PVM > 0 %}{{ 100 - (player.PV * 100 / player.PVM) }}{% else %}0{% endif %}%"></i>
+                                <span class="updatable-stat" stat="PV">{{ player.PV }}</span>
+                            </p>
+                            <div></div>
+                        </div>
+                        <div class="stat-controls" stat="PC" type="Player" max="{{ player.PCM }}" id="{{ player.id }}">
+                            <div></div>
+                            <p>
+                                <i class="bi bi-gear-fill" style="color: orange"></i>
+                                <i class="mask" style="height: {% if player.PCM > 0 %}{{ 100 - (player.PC * 100 / player.PCM) }}{% else %}0{% endif %}%"></i>
+                                <span class="updatable-stat" stat="PC">{{ player.PC }}</span>
+                            </p>
+                            <div></div>
+                        </div>
+                        <div class="stat-controls" stat="PM" type="Player" max="{{ player.PMM }}" id="{{ player.id }}">
+                            <div></div>
+                            <p>
+                                <i class="bi bi-droplet-fill" style="color: dodgerblue"></i>
+                                <i class="mask" style="height: {% if player.PMM > 0 %}{{ 100 - (player.PM * 100 / player.PMM) }}{% else %}0{% endif %}%"></i>
+                                <span class="updatable-stat">{{ player.PM }}</span>
+                            </p>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="stats table table-borderless">
+                <tr>
+                    <th>Fo</th>
+                    <th>In</th>
+                    <th>So</th>
+                    <th>Pe</th>
+                </tr>
+                <tr>
+                    <td>{{ player.strength }}</td>
+                    <td>{{ player.intel }}</td>
+                    <td>{{ player.social }}</td>
+                    <td>{{ player.perception }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
