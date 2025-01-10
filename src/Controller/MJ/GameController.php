@@ -3,6 +3,7 @@
 namespace App\Controller\MJ;
 
 use App\Form\MapType;
+use App\Form\PinType;
 use App\Repository\PlayerRepository;
 use App\Repository\PNJRepository;
 use App\Service\FileUploader;
@@ -10,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/mj')]
@@ -30,10 +31,9 @@ class GameController extends AbstractController
     function map (Request $request, EntityManagerInterface $em, FileUploader $uploader): Response
     {
         $form = $this->createForm(MapType::class);
+        $pinForm = $this->createForm(PinType::class, null, ['attr' => ['class' => 'api-form']]);
 
         $form->handleRequest($request);
-
-        dump($form->get('map')->getData());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('map')->getData();
@@ -44,7 +44,8 @@ class GameController extends AbstractController
         }
 
         return $this->render('mj/map.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'pinForm' => $pinForm
         ]);
     }
 }

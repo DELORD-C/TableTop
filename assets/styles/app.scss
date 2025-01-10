@@ -99,6 +99,12 @@ table {
   height: 271px;
 }
 
+#timeline {
+  .card {
+    cursor: grab;
+  }
+}
+
 .entity-list {
   display: flex;
   flex-flow: nowrap;
@@ -424,6 +430,25 @@ table {
   z-index: 1;
 }
 
+#pin-popup {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 70px);
+  backdrop-filter: blur(10px);
+  background: #000000a3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.3s;
+  flex-flow: column;
+
+  form {
+    max-width: 300px;
+  }
+}
+
 .map-pin {
   position: absolute;
   font-size: 25px;
@@ -433,6 +458,23 @@ table {
 
   &:hover {
     transform: scale(1.2) translateY(-5%);
+
+    &:after {
+      opacity: 1;
+      text-shadow: #1a1d21 1px 1px 2px;
+    }
+  }
+
+  &:after {
+    transition: 0.3s;
+    content: attr(data-name);
+    position: absolute;
+    text-shadow: transparent 0 0 0;
+    font-size: 1em;
+    display: inline-flex;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
   }
 }
 

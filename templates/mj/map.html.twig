@@ -6,6 +6,7 @@
             <h1>Uploader une map</h1>
             {{ form(form) }}
         {% else %}
+
             <div class="map">
                 <div id="map-inner">
                     <div class="map-controls">
@@ -14,10 +15,14 @@
                         <button id="map-new"><i class="bi bi-plus-lg"></i></button>
                     </div>
                     {% for pin in app.user.game.pins %}
-                        <i class="bi bi-geo-{% if pin.team %}alt-{% endif %}fill map-pin" id="pin{{ pin.id }}" style="left: {{ pin.x }}%; top: {{ pin.y }}%" data-id="{{ pin.id }}" data-name="{{ pin.name }}" data-note="{{ pin.note }}" data-team="{{ pin.team }}" data-color="{{ pin.color }}"></i>
+                        <i class="bi bi-geo-alt-fill map-pin" draggable="true" id="pin{{ pin.id }}" style="left: {{ pin.x }}%; top: {{ pin.y }}%{% if pin.color %}; color: {{ pin.color }}{% endif %}" data-id="{{ pin.id }}" data-name="{{ pin.name }}" data-note="{{ pin.note }}"></i>
                     {% endfor %}
-                    <img src="{{ asset('build/uploads/' ~ app.user.game.map) }}">
+                    <img id="map-bg" alt="Map" src="{{ asset('build/uploads/' ~ app.user.game.map) }}">
                 </div>
+            </div>
+            <div id="pin-popup">
+                {{ form(pinForm) }}
+                <button id="pin-delete" class="btn btn-danger"><i class="bi bi-trash"></i></button>
             </div>
             <div id="map-popup">
                 <h1>Uploader une autre map</h1>

@@ -7,12 +7,14 @@ use App\Entity\Inventory\Item;
 use App\Entity\Pin;
 use App\Entity\Player;
 use App\Entity\PNJ;
+use App\Form\PinType;
 use App\Service\CustomSerializer;
 use App\Service\FightSetter;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
@@ -157,5 +159,49 @@ class ApiController extends AbstractController
         $em->persist($pin);
         $em->flush();
         return $this->json($serializer->serialize($pin));
+    }
+
+    #[Route('/pin/update/{pin}')]
+    public function updatePin(Pin $pin, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(PinType::class, $pin);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pin = $form->getData();
+            $em->persist($pin);
+            $em->flush();
+            return $this->json(true);
+        }
+
+        return $this->json(false);
+    }
+
+    #[Route('/pin/updatePosition/{pin}/{x}/{y}')]
+    public function updatePinPosition(Pin $pin, float $x, float $y, EntityManagerInterface $em): Response
+    {
+        $pin->setX($x);
+        $pin->setY($y);
+        $em->persist($pin);
+        $em->flush();
+        return $this->json(true);
+    }
+
+    #[Route('/pin/delete/{pin}')]
+    public function deletePin(Pin $pin, EntityManagerInterface $em): Response
+    {
+        $em->remove($pin);
+        $em->flush();
+        return $this->json(true);
+    }
+
+    /**
+     * @throws ExceptionInterface
+     */
+    #[Route('/pin/{pin}')]
+    public function Pin(Pin $pin, CustomSerializer $serializer): Response
+    {
+        return new Response($serializer->serialize($pin));
     }
 }

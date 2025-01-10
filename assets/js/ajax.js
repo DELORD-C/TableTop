@@ -1,221 +1,158 @@
-let inputs = document.querySelectorAll(".api-form input, .api-form select, .api-form textarea"),
-    forms = document.querySelectorAll('form.api-form'),
-    timeout;
+let inputs, forms, timeout, updateButtons, updateTimeout, value, gold, newCategoryBtn, newCategoryInput, goldInt;
 
-for (let input of inputs) {
-    input.addEventListener('keydown', function () {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            sendForm(input.form);
-        }, 100);
-    });
-    input.addEventListener('change', function () {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            sendForm(input.form);
-        }, 100);
-    });
-}
+document.addEventListener('DOMContentLoaded', function () {
+    initAjax();
+});
 
-function sendForm (form) {
-    fetch(form.action, { method: form.method, body: new FormData(form) })
-        .then(function (response) {
-            if (response.status !== 200) {
-                console.log(response);
-                fail();
-            }
-            else {
-                validate();
-            }
-        });
-}
-
-function validate () {
-    document.getElementById('validate').style.opacity = "1";
-    document.getElementById('validate').style.fontSize = "40px";
-    setTimeout(function() {
-        document.getElementById('validate').style.opacity = "0";
-        setTimeout(function() {
-            document.getElementById('validate').style.transition = "none";
-            document.getElementById('validate').style.fontSize = "20px";
-            document.getElementById('validate').style.transition = "0.3s";
-
-        }, 400)
-    }, 2000)
-}
-
-function fail () {
-    document.getElementById('fail').style.opacity = "1";
-    document.getElementById('fail').style.fontSize = "40px";
-    setTimeout(function() {
-        document.getElementById('fail').style.opacity = "0";
-        setTimeout(function() {
-            document.getElementById('fail').style.transition = "none";
-            document.getElementById('fail').style.fontSize = "20px";
-            document.getElementById('fail').style.transition = "0.3s";
-
-        }, 400)
-    }, 2000)
-}
-
-if (forms.length > 0) {
-    setInterval(function () {
-        for (let form of forms) {
-            let updatePath = form.getAttribute('update');
-            if (updatePath) {
-                fetch('/api/' + updatePath)
-                    .then(function (response) {
-                        if (response.status === 200) {
-                            response.json()
-                                .then(response => updateFormInputs(form, response));
-                        }
-                        else {
-                            response.json()
-                                .then(response => console.log(response));
-                        }
-                    });
-            }
-        }
-    }, 1000)
-}
-
-function updateFormInputs(form, data) {
-    let elements = form.querySelectorAll("input:not([type='hidden']), select, textarea");
-    for (let element of elements) {
-        if (element !== document.activeElement) {
-            let ids = element.getAttribute('id').split('_');
-            let attribute = ids[ids.length - 1]
-            if (attribute === 'token') {
-                element.value = data['token']['id']
-            }
-            else {
-                element.value = data[attribute];
-            }
-        }
-    }
-}
-
-let pnjSearch = document.getElementById("pnj-search");
-
-if (pnjSearch) {
-    pnjSearch.addEventListener("change", filterPnjs);
-    pnjSearch.addEventListener("keydown", filterPnjs);
-}
-
-function filterPnjs () {
-    for (let pnj of document.getElementsByClassName("pnj-card")) {
-        if (pnj.querySelector('h6').innerHTML.toLowerCase().includes(pnjSearch.value.toLowerCase()) || pnjSearch.value === '') {
-            pnj.classList.remove('hidden');
-        }
-        else {
-            pnj.classList.add('hidden');
-        }
-    }
-}
-
-let updateButtons = document.querySelectorAll(".updatable-object button"),
-    updateTimeout,
+document.addEventListener('turbo:render', function () {
+    initAjax();
+});
+function initAjax() {
+    inputs = document.querySelectorAll(".api-form input, .api-form select, .api-form textarea");
+    forms = document.querySelectorAll('form.api-form');
+    updateButtons = document.querySelectorAll(".updatable-object button");
     value = 0;
-
-if (updateButtons.length > 0) {
-    for (let button of updateButtons) {
-        button.addEventListener("click", function () {
-            clearTimeout(updateTimeout);
-            let container = this.parentElement,
-                btn = this,
-                op,
-                max = parseInt(container.getAttribute('max')),
-                span = container.querySelector('span'),
-                actual = parseInt(span.innerHTML);
-
-            if (btn.innerHTML === '+') {
-                op = 1;
-            } else {
-                op = -1;
-            }
-
-            if (actual < max || (actual === max && op === -1)) {
-                value = value + op;
-
-                let percent = 100 - Math.round((actual + op) * 100 / max);
-
-                if (percent > 100) {
-                    percent = 100;
+    gold = document.getElementById("gold");
+    newCategoryBtn = document.getElementById("newCategoryBtn");
+    newCategoryInput = document.getElementById("newCategory");
+    for (let input of inputs) {
+        input.addEventListener('keydown', function () {
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                if (input.value.length > 0) {
+                    sendForm(input.form);
                 }
+            }, 100);
+        });
+        input.addEventListener('change', function () {
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                if (input.value.length > 0) {
+                    sendForm(input.form);
+                }
+            }, 100  );
+        });
+    }
 
-                container.querySelector('.mask').style.height = percent + '%';
-
-                span.innerHTML = (actual + op).toString();
-
-                updateTimeout = setTimeout(function () {
-                    fetch('/api/updateEntityStat/' + container.getAttribute('type') + '/' + container.getAttribute('stat') + '/' + container.getAttribute('id') + '/' + value)
+    if (forms.length > 0) {
+        setInterval(function () {
+            for (let form of forms) {
+                let updatePath = form.getAttribute('update');
+                if (updatePath) {
+                    fetch('/api/' + updatePath)
                         .then(function (response) {
                             if (response.status === 200) {
                                 response.json()
-                                    .then(function (response) {
-                                        span.innerHTML = response
-                                        clearTimeout(updateTimeout)
-                                    });
-                            } else {
+                                    .then(response => updateFormInputs(form, response));
+                            }
+                            else {
                                 response.json()
                                     .then(response => console.log(response));
                             }
                         });
-                    value = 0;
-                }, 100);
+                }
             }
-        });
+        }, 1000)
     }
-}
 
-let newCategoryBtn = document.getElementById("newCategoryBtn");
-let newCategoryInput = document.getElementById("newCategory");
+    let pnjSearch = document.getElementById("pnj-search");
 
-if (newCategoryBtn) {
-    newCategoryBtn.addEventListener('click', newCategory);
-    newCategoryInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') {
-            newCategory();
-        }
-    })
-}
+    if (pnjSearch) {
+        pnjSearch.addEventListener("change", filterPnjs);
+        pnjSearch.addEventListener("keydown", filterPnjs);
+    }
 
-function newCategory () {
-    let value = newCategoryInput.value;
-    if (value.length > 0) {
-        fetch('/api/category/create/' + value)
-            .then(function (response) {
-                if (response.status === 200) {
-                    response.json()
-                        .then(function (json) {
-                            let category = JSON.parse(json);
-                            let html = `
-                                    <div class="col col-6 category" data-id="` + category.id + `">
-                                        <div class="border border-darker rounded">
-                                            <div class="input-group d-flex justify-content-between">
-                                                <input class="form-control border-0 categoryName" style="font-size: 24px" value="` + category.name + `">
-                                                <button class="btn btn-dark rounded-0 deleteCategoryBtn" style="max-width: 55px;"><i class="bi-trash"></i></button>
-                                            </div>
-                                            <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center input-group bg-transparent border-darker p-0 rounded-0 border-bottom-0 border-end-0 border-start-0">
-                                                    <input class="form-control border-0 newItem" id="newItem" placeholder="Nouvel objet" aria-label="Nouvel objet">
-                                                    <div class="input-group-append ">
-                                                        <button class="btn btn-dark rounded-0 newItemBtn" type="button">Ajouter</button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                `
-                            let elem = fromHTML(html);
-                            document.getElementById("categories").insertBefore(elem, document.getElementById("lastCategory"));
-                            newCategoryInput.value = "";
-                        });
+    newCategoryBtn = document.getElementById("newCategoryBtn");
+    newCategoryInput = document.getElementById("newCategory");
+
+    if (newCategoryBtn) {
+        newCategoryBtn.addEventListener('click', newCategory);
+        newCategoryInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                newCategory();
+            }
+        })
+    }
+
+    updateButtons = document.querySelectorAll(".updatable-object button");
+    value = 0;
+
+    if (updateButtons.length > 0) {
+        for (let button of updateButtons) {
+            button.addEventListener("click", function () {
+                clearTimeout(updateTimeout);
+                let container = this.parentElement,
+                    btn = this,
+                    op,
+                    max = parseInt(container.getAttribute('max')),
+                    span = container.querySelector('span'),
+                    actual = parseInt(span.innerHTML);
+
+                if (btn.innerHTML === '+') {
+                    op = 1;
                 } else {
-                    response.json()
-                        .then(response => console.log(response));
+                    op = -1;
+                }
+
+                if (actual < max || (actual === max && op === -1)) {
+                    value = value + op;
+
+                    let percent = 100 - Math.round((actual + op) * 100 / max);
+
+                    if (percent > 100) {
+                        percent = 100;
+                    }
+
+                    container.querySelector('.mask').style.height = percent + '%';
+
+                    span.innerHTML = (actual + op).toString();
+
+                    updateTimeout = setTimeout(function () {
+                        fetch('/api/updateEntityStat/' + container.getAttribute('type') + '/' + container.getAttribute('stat') + '/' + container.getAttribute('id') + '/' + value)
+                            .then(function (response) {
+                                if (response.status === 200) {
+                                    response.json()
+                                        .then(function (response) {
+                                            span.innerHTML = response
+                                            clearTimeout(updateTimeout)
+                                        });
+                                } else {
+                                    response.json()
+                                        .then(response => console.log(response));
+                                }
+                            });
+                        value = 0;
+                    }, 100);
                 }
             });
+        }
+    }
+
+    gold = document.getElementById("gold");
+    clearInterval(goldInt)
+    if (gold) {
+        gold.addEventListener('keydown', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                updateGold(gold.value);
+            }, 100);
+        })
+
+        goldInt = setInterval(function () {
+            fetch('/api/gold/get')
+                .then(function (response) {
+                    if (response.status === 200) {
+                        response.json()
+                            .then(function (value) {
+                                gold.value = value;
+                            });
+                    }
+                    else {
+                        response.json()
+                            .then(response => console.log(response));
+                    }
+                });
+        }, 1000)
     }
 }
 
@@ -271,6 +208,113 @@ document.addEventListener("keydown", function(e){
         }, 100);
     }
 });
+
+function sendForm (form) {
+    fetch(form.action, { method: form.method, body: new FormData(form) })
+        .then(function (response) {
+            if (response.status !== 200) {
+                console.log(response);
+                fail();
+            }
+            else {
+                validate();
+            }
+        });
+}
+
+function validate () {
+    document.getElementById('validate').style.opacity = "1";
+    document.getElementById('validate').style.fontSize = "40px";
+    setTimeout(function() {
+        document.getElementById('validate').style.opacity = "0";
+        setTimeout(function() {
+            document.getElementById('validate').style.transition = "none";
+            document.getElementById('validate').style.fontSize = "20px";
+            document.getElementById('validate').style.transition = "0.3s";
+
+        }, 400)
+    }, 2000)
+}
+
+function fail () {
+    document.getElementById('fail').style.opacity = "1";
+    document.getElementById('fail').style.fontSize = "40px";
+    setTimeout(function() {
+        document.getElementById('fail').style.opacity = "0";
+        setTimeout(function() {
+            document.getElementById('fail').style.transition = "none";
+            document.getElementById('fail').style.fontSize = "20px";
+            document.getElementById('fail').style.transition = "0.3s";
+
+        }, 400)
+    }, 2000)
+}
+
+function updateFormInputs(form, data) {
+    let elements = form.querySelectorAll("input:not([type='hidden']), select, textarea");
+    for (let element of elements) {
+        if (element !== document.activeElement) {
+            let ids = element.getAttribute('id').split('_');
+            let attribute = ids[ids.length - 1]
+            if (attribute === 'token') {
+                element.value = data['token']['id']
+            }
+            else {
+                element.value = data[attribute];
+            }
+        }
+    }
+}
+
+function filterPnjs () {
+    for (let pnj of document.getElementsByClassName("pnj-card")) {
+        if (pnj.querySelector('h6').innerHTML.toLowerCase().includes(pnjSearch.value.toLowerCase()) || pnjSearch.value === '') {
+            pnj.classList.remove('hidden');
+        }
+        else {
+            pnj.classList.add('hidden');
+        }
+    }
+}
+
+function newCategory () {
+    let value = newCategoryInput.value;
+    if (value.length > 0) {
+        fetch('/api/category/create/' + value)
+            .then(function (response) {
+                if (response.status === 200) {
+                    response.json()
+                        .then(function (json) {
+                            let category = JSON.parse(json);
+                            let html = `
+                                    <div class="col col-6 category" data-id="` + category.id + `">
+                                        <div class="border border-darker rounded">
+                                            <div class="input-group d-flex justify-content-between">
+                                                <input class="form-control border-0 categoryName" style="font-size: 24px" value="` + category.name + `">
+                                                <button class="btn btn-dark rounded-0 deleteCategoryBtn" style="max-width: 55px;"><i class="bi-trash"></i></button>
+                                            </div>
+                                            <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center input-group bg-transparent border-darker p-0 rounded-0 border-bottom-0 border-end-0 border-start-0">
+                                                    <input class="form-control border-0 newItem" id="newItem" placeholder="Nouvel objet" aria-label="Nouvel objet">
+                                                    <div class="input-group-append ">
+                                                        <button class="btn btn-dark rounded-0 newItemBtn" type="button">Ajouter</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                `
+                            let elem = fromHTML(html);
+                            document.getElementById("categories").insertBefore(elem, document.getElementById("lastCategory"));
+                            newCategoryInput.value = "";
+                        });
+                } else {
+                    response.json()
+                        .then(response => console.log(response));
+                }
+            });
+    }
+}
 
 function deleteCategory(categoryElem) {
     fetch('/api/category/delete/' + categoryElem.dataset.id)
@@ -379,32 +423,6 @@ function changeCount(amount, button) {
     timeout = setTimeout(function() {
         updateItem(button.parentElement);
     }, 100);
-}
-
-let gold = document.getElementById("gold");
-if (gold) {
-    gold.addEventListener('keydown', (e) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            updateGold(gold.value);
-        }, 100);
-    })
-
-    setInterval(function () {
-        fetch('/api/gold/get')
-            .then(function (response) {
-                if (response.status === 200) {
-                    response.json()
-                        .then(function (value) {
-                            gold.value = value;
-                        });
-                }
-                else {
-                    response.json()
-                        .then(response => console.log(response));
-                }
-            });
-    }, 1000)
 }
 
 function updateGold(value) {

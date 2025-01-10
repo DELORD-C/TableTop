@@ -2,23 +2,33 @@ import DiceBox from '@3d-dice/dice-box';
 let diceBox;
 let diceTimeout;
 
-if (document.getElementById('dice-box')) {
-    diceBox = new DiceBox("#dice-box", {
-        assetPath: "/assets/",
-        scale: 6,
-        theme: "rock",
-        gravity: 4
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    initDice();
+});
 
-    diceBox.init();
+document.addEventListener('turbo:render', function () {
+    initDice();
+});
 
-    document.getElementById('dice-btn-2').addEventListener('click', () => { rollDice('1d2') });
-    document.getElementById('dice-btn-3').addEventListener('click', () => { rollDice('1d3') });
-    document.getElementById('dice-btn-4').addEventListener('click', () => { rollDice('1d4') });
-    document.getElementById('dice-btn-6').addEventListener('click', () => { rollDice('1d6') });
-    document.getElementById('dice-btn-10').addEventListener('click', () => { rollDice('1d10') });
-    document.getElementById('dice-btn-20').addEventListener('click', () => { rollDice('1d20') });
-    document.getElementById('dice-btn-100').addEventListener('click', () => { rollDice('1d100') });
+function initDice () {
+    if (document.getElementById('dice-box')) {
+        diceBox = new DiceBox("#dice-box", {
+            assetPath: "/assets/",
+            scale: 6,
+            theme: "rock",
+            gravity: 4
+        });
+
+        diceBox.init();
+
+        document.getElementById('dice-btn-2').addEventListener('click', () => { rollDice('1d2') });
+        document.getElementById('dice-btn-3').addEventListener('click', () => { rollDice('1d3') });
+        document.getElementById('dice-btn-4').addEventListener('click', () => { rollDice('1d4') });
+        document.getElementById('dice-btn-6').addEventListener('click', () => { rollDice('1d6') });
+        document.getElementById('dice-btn-10').addEventListener('click', () => { rollDice('1d10') });
+        document.getElementById('dice-btn-20').addEventListener('click', () => { rollDice('1d20') });
+        document.getElementById('dice-btn-100').addEventListener('click', () => { rollDice('1d100') });
+    }
 }
 
 function rollDice (dice) {

@@ -1,13 +1,21 @@
 import Sortable from 'sortablejs';
 document.addEventListener('DOMContentLoaded', function () {
-   let fightBtns= document.querySelectorAll(".fight-toggle");
-   let playBtns = document.querySelectorAll(".fight-play");
+   startFight();
+});
 
-   for (let fightBtn of fightBtns) {
-       fightBtn.addEventListener('click', function () {
-           toggleFight(fightBtn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement);
-       })
-   }
+document.addEventListener('turbo:render', function () {
+    startFight();
+});
+
+function startFight() {
+    let fightBtns= document.querySelectorAll(".fight-toggle");
+    let playBtns = document.querySelectorAll(".fight-play");
+
+    for (let fightBtn of fightBtns) {
+        fightBtn.addEventListener('click', function () {
+            toggleFight(fightBtn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement);
+        })
+    }
 
     for (let playBtn of playBtns) {
         playBtn.addEventListener('click', function () {
@@ -43,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         sortTimeline();
     }
-});
+}
 
 function toggleFight(entityCard) {
     fetch('/api/switchFighting/' + entityCard.getAttribute('type') + '/' + entityCard.getAttribute('id'))
