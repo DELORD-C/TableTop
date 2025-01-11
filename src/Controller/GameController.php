@@ -123,7 +123,7 @@ class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/fight')]
+    #[Route('/')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     function fight (PNJRepository $PNJRepository, PlayerRepository $playerRepository): Response
     {

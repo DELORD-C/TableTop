@@ -11,7 +11,7 @@
                         Timeline
                     </div>
                     <div class="card-body entity-container fight-container">
-                        <div class="row overflow-x entity-list" id="timeline-player">
+                        <div class="row overflow-x entity-list" id="timeline">
                             {% for player in players %}
                                 {% if 'ROLE_MJ' not in player.roles and player.isFighting %}
                                     {% include 'includes/_player-card-off.html.twig' with { player: player} %}
