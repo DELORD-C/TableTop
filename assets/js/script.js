@@ -26,12 +26,10 @@ function initToolbar() {
         sidebarToggle.addEventListener('click', event => {
             event.preventDefault();
             document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
         });
 
         document.getElementById("layoutSidenav_content").addEventListener('click', () => {
-            document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+            document.body.classList.remove('sb-sidenav-toggled');
         });
     }
 }
