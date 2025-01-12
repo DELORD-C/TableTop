@@ -29,7 +29,7 @@ function initToolbar() {
         });
 
         document.getElementById("layoutSidenav_content").addEventListener('click', () => {
-            document.body.classList.remove('sb-sidenav-toggled');
+            document.body.classList.add('sb-sidenav-toggled');
         });
     }
 }
