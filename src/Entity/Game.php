@@ -40,11 +40,22 @@ class Game
     #[ORM\OneToOne(mappedBy: 'game', cascade: ['persist', 'remove'])]
     private ?Inventory $inventory = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $ambiance = null;
+
+    /**
+     * @var Collection<int, Sound>
+     */
+    #[ORM\OneToMany(targetEntity: Sound::class, mappedBy: 'game', orphanRemoval: true)]
+    private Collection $sounds;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
         $this->pins = new ArrayCollection();
         $this->PNJs = new ArrayCollection();
+        $this->sounds = new ArrayCollection();
+        $this->ambiance = "chill";
     }
 
     public function getId(): ?int
@@ -204,6 +215,48 @@ class Game
         }
 
         $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    public function getAmbiance(): ?string
+    {
+        return $this->ambiance;
+    }
+
+    public function setAmbiance(string $ambiance): static
+    {
+        $this->ambiance = $ambiance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sound>
+     */
+    public function getSounds(): Collection
+    {
+        return $this->sounds;
+    }
+
+    public function addSound(Sound $sound): static
+    {
+        if (!$this->sounds->contains($sound)) {
+            $this->sounds->add($sound);
+            $sound->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSound(Sound $sound): static
+    {
+        if ($this->sounds->removeElement($sound)) {
+            // set the owning side to null (unless already changed)
+            if ($sound->getGame() === $this) {
+                $sound->setGame(null);
+            }
+        }
 
         return $this;
     }

@@ -47,6 +47,20 @@ class PlayerEditType extends AbstractType
                     'class' => 'form-floating',
                 ]
             ])
+            ->add('spec', TextType::class, [
+                'label' => 'Spécialisation',
+                'attr' => ['placeholder' => 'Spécialisation'],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ]
+            ])
+            ->add('job', TextType::class, [
+                'label' => 'Métier',
+                'attr' => ['placeholder' => 'Métier'],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ]
+            ])
             ->add('PVM', IntegerType::class, [
                 'label' => 'PV Max',
                 'attr' => ['placeholder' => 'PV Max'],
@@ -120,6 +134,13 @@ class PlayerEditType extends AbstractType
             ->add('passiv', TextAreaType::class, [
                 'label' => 'Passifs',
                 'attr' => ['placeholder' => 'Passifs'],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ]
+            ])
+            ->add('temp', TextareaType::class, [
+                'label' => 'Effets temporaires',
+                'attr' => ['placeholder' => 'Effets temporaires'],
                 'row_attr' => [
                     'class' => 'form-floating',
                 ]

@@ -21,7 +21,7 @@ security:
                 check_path: app_player_login
                 # username_parameter: _username
                 # password_parameter: _password
-                # default_target_path: app_post_list
+                default_target_path: app_game_fight
             logout:
                 path: app_player_logout
             # activate different ways to authenticate

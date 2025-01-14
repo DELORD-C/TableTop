@@ -1,0 +1,40 @@
+{% extends 'mj.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        <h1>Liste des Musiques</h1>
+        <div class="music-list row">
+            <div class="type col">
+                <h2>Chill</h2>
+                {% for music in chill %}
+                    <div class="btn-group music d-flex justify-content-center">
+                        <button class="btn music-play" data-file="/build/uploads/music/{{ music.file }}"><i class="bi bi-play"></i></button>
+                        <p>{{ music.file|removeExt }}</p>
+                        <a class="btn btn-danger music-delete" href="{{ path('app_mj_music_delete', {'music': music.id}) }}"><i class="bi bi-trash"></i></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="type col">
+                <h2>Suspense</h2>
+                {% for music in suspense %}
+                    <div class="btn-group music d-flex justify-content-center align-items-center">
+                        <button class="btn music-play" data-file="/build/uploads/music/{{ music.file }}"><i class="bi bi-play"></i></button>
+                        <p>{{ music.file|removeExt }}</p>
+                        <a class="btn btn-danger br- music-delete" href="{{ path('app_mj_music_delete', {'music': music.id}) }}"><i class="bi bi-trash"></i></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="type col">
+                <h2>Combat</h2>
+                {% for music in combat %}
+                    <div class="btn-group music d-flex justify-content-center">
+                        <button class="btn music-play" data-file="/build/uploads/music/{{ music.file }}"><i class="bi bi-play"></i></button>
+                        <p>{{ music.file|removeExt }}</p>
+                        <a class="btn btn-danger br- music-delete" href="{{ path('app_mj_music_delete', {'music': music.id}) }}"><i class="bi bi-trash"></i></a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <a class="btn-primary btn" href="{{ path('app_mj_music_create') }}">Créer</a>
+    </div>
+{% endblock %}

@@ -1,9 +1,5 @@
 import Sortable from 'sortablejs';
-document.addEventListener('DOMContentLoaded', function () {
-   startFight();
-});
-
-document.addEventListener('turbo:render', function () {
+document.addEventListener('turbo:load', function () {
     startFight();
 });
 

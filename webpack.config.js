@@ -24,7 +24,7 @@ Encore
     .enableSassLoader()
     .copyFiles({
         from: './assets/medias',
-        to: 'medias/[path][name].[hash:8].[ext]'
+        to: 'medias/[path][name].[ext]'
     })
     .copyFiles({
         from: './assets/tokens',

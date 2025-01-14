@@ -1,35 +1,34 @@
-/*!
-    * Start Bootstrap - SB Admin v7.0.7 (https://startbootstrap.com/template/sb-admin)
-    * Copyright 2013-2023 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
-    */
-    // 
-// Scripts
-// 
-
-let source = false, target = false;
-
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('turbo:load', function () {
     initToolbar();
-});
 
-window.addEventListener('turbo:render', function () {
-    initToolbar();
 });
 
 function initToolbar() {
-    const sidebarToggle = document.body.querySelector('#sidebarToggle');
-    if (sidebarToggle) {
-        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-        //     document.body.classList.toggle('sb-sidenav-toggled');
-        // }
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
-        });
+    document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.body.classList.toggle('sb-sidenav-toggled');
+    })
 
-        document.getElementById("layoutSidenav_content").addEventListener('click', () => {
-            document.body.classList.add('sb-sidenav-toggled');
-        });
+    document.getElementById("layoutSidenav_content").addEventListener("click", function () {
+        collapseSidebar()
+    })
+
+    document.querySelector('nav').addEventListener("click", function (e) {
+        if (!e.target.closest("#sidebarToggle")) {
+            collapseSidebar()
+        }
+    })
+
+    if (window.innerWidth < 992) {
+        document.body.classList.remove('sb-sidenav-toggled');
+    }
+}
+
+function collapseSidebar () {
+    console.log(document.querySelector('nav.navbar').offsetWidth)
+    if (document.querySelector('nav.navbar').offsetWidth >= 992) {
+        document.body.classList.add('sb-sidenav-toggled');
+    }
+    else {
+        document.body.classList.remove('sb-sidenav-toggled');
     }
 }

@@ -4,8 +4,6 @@ namespace App\Controller\MJ;
 
 use App\Form\MapType;
 use App\Form\PinType;
-use App\Repository\PlayerRepository;
-use App\Repository\PNJRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

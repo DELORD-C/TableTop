@@ -2,11 +2,7 @@ import DiceBox from '@3d-dice/dice-box';
 let diceBox;
 let diceTimeout;
 
-document.addEventListener('DOMContentLoaded', function () {
-    initDice();
-});
-
-document.addEventListener('turbo:render', function () {
+document.addEventListener('turbo:load', function () {
     initDice();
 });
 

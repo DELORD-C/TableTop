@@ -1,7 +1,3 @@
-Update fight player side
-sound effects & musiques
-spécialisation
-métier
-augmenter taille passifs
+Update fight player side (true update, not refresh)
 
-buffs temporaires
+sound effects & musiques (file size php.ini ?)

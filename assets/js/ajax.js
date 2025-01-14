@@ -1,10 +1,6 @@
 let inputs, forms, timeout, updateButtons, updateTimeout, value, gold, newCategoryBtn, newCategoryInput, goldInt;
 
-document.addEventListener('DOMContentLoaded', function () {
-    initAjax();
-});
-
-document.addEventListener('turbo:render', function () {
+document.addEventListener('turbo:load', function () {
     initAjax();
 });
 function initAjax() {

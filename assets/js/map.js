@@ -1,10 +1,6 @@
 let mapEdit, mapNew, mapPopup, pinPopup, displayed, pins, mapBg, xOffset, yOffset, currentPin;
 
-document.addEventListener('DOMContentLoaded', function () {
-    initMap();
-});
-
-document.addEventListener('turbo:render', function () {
+document.addEventListener('turbo:load', function () {
     initMap();
 });
 function initMap () {

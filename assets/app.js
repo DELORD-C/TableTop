@@ -13,6 +13,9 @@ require('trix');
 // Axios
 require('axios');
 
+// Howler
+import {Howl, Howler} from 'howler';
+
 // Custom Scripts
 require('./js/all');
 require('./js/script');
@@ -20,6 +23,9 @@ require('./js/dice');
 require('./js/ajax');
 require('./js/fight');
 require('./js/map');
+require('./js/sound');
 
 // Start the Stimulus application
 import './bootstrap';
+
+Turbo.setFormMode('off')

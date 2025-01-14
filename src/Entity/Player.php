@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\DataClass\PlayerClass;
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -104,6 +105,15 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isPlaying = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $spec = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $job = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $temp = null;
 
     public function __construct() {
         $this->isPlaying = 0;
@@ -477,6 +487,42 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsPlaying(bool $isPlaying): self
     {
         $this->isPlaying = $isPlaying;
+
+        return $this;
+    }
+
+    public function getSpec(): ?string
+    {
+        return $this->spec;
+    }
+
+    public function setSpec(?string $spec): static
+    {
+        $this->spec = $spec;
+
+        return $this;
+    }
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(?string $job): static
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function getTemp(): ?string
+    {
+        return $this->temp;
+    }
+
+    public function setTemp(?string $temp): static
+    {
+        $this->temp = $temp;
 
         return $this;
     }

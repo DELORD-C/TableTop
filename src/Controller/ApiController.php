@@ -8,6 +8,7 @@ use App\Entity\Pin;
 use App\Entity\Player;
 use App\Entity\PNJ;
 use App\Form\PinType;
+use App\Repository\MusicRepository;
 use App\Service\CustomSerializer;
 use App\Service\FightSetter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -203,5 +204,22 @@ class ApiController extends AbstractController
     public function Pin(Pin $pin, CustomSerializer $serializer): Response
     {
         return new Response($serializer->serialize($pin));
+    }
+
+    #[Route('/playlists')]
+    #[IsGranted("ROLE_MJ")]
+    public function playlists(MusicRepository $rep): Response
+    {
+        $chill = $rep->findBy(['list' => 0]);
+        $suspense = $rep->findBy(['list' => 1]);
+        $combat = $rep->findBy(['list' => 2]);
+        shuffle($chill);
+        shuffle($suspense);
+        shuffle($combat);
+        return $this->json([
+            'chill' => $chill,
+            'suspense' => $suspense,
+            'combat' => $combat
+        ]);
     }
 }

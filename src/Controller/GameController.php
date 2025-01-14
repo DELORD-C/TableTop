@@ -6,7 +6,6 @@ use App\Entity\Game;
 use App\Entity\Inventory;
 use App\Entity\Player;
 use App\Form\GameType;
-use App\Form\InventoryType;
 use App\Form\NotesType;
 use App\Repository\PlayerRepository;
 use App\Repository\PNJRepository;
@@ -19,10 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
-use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 
 class GameController extends AbstractController
 {
@@ -154,5 +149,15 @@ class GameController extends AbstractController
             'pnjs' => $PNJRepository->findAll(),
             'players' => $playerRepository->findAll()
         ]);
+    }
+
+    #[Route('/ambiance/{ambiance}')]
+    #[IsGranted('ROLE_MJ')]
+    function ambiance (string $ambiance, EntityManagerInterface $em, Request $request): Response
+    {
+        $game = $this->getUser()->getGame();
+        $game->setAmbiance($ambiance);
+        $em->flush();
+        return $this->redirect($request->headers->get('referer'));
     }
 }

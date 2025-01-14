@@ -1,0 +1,18 @@
+<div class="music-player d-flex align-items-center justify-content-center mx-5">
+    <button class="btn" id="music-toggle"><i class="bi bi-play"></i></button>
+    <div id="music-track"><div id="music-bar"></div><div id="music-title"></div></div>
+    <div class="ms-3 me-1 text-nowrap"><span id="music-time">0:00</span> / <span id="music-duration">0:00</span></div>
+    <button id="music-next" class="btn"><i class="bi bi-skip-end"></i></button>
+</div>
+
+<div id="ambiance-selector" class="btn-group mx-5">
+    <a data-ambiance="chill" href="{{ path('app_game_ambiance', {'ambiance': 'chill'}) }}" type="button" class="btn{% if app.user.game.ambiance == 'chill' %} active{% endif %}"><i class="bi bi-send"></i></a>
+    <a data-ambiance="suspense" href="{{ path('app_game_ambiance', {'ambiance': 'suspense'}) }}" type="button" class="btn{% if app.user.game.ambiance == 'suspense' %} active{% endif %}"><i class="bi bi-search"></i></a>
+    <a data-ambiance="combat" href="{{ path('app_game_ambiance', {'ambiance': 'combat'}) }}" type="button" class="btn{% if app.user.game.ambiance == 'combat' %} active{% endif %}"><i class="bi bi-lightning"></i></a>
+</div>
+
+<div id="sound-effects" class="btn-group mx-5">
+    {% for sound in app.user.game.sounds %}
+        <button data-file="{{ sound.file }}" type="button" class="btn border sound-btn"><i class="fa fa-{{ sound.icon }}"></i></button>
+    {% endfor %}
+</div>

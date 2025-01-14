@@ -1,0 +1,16 @@
+{% extends 'mj.html.twig' %}
+
+{% block main %}
+    <div class="container-fluid px-4 d-flex justify-content-center align-items-center flex-column" style="min-height: calc(100vh - 125px)">
+        <h1>Liste des Sons</h1>
+        <ul class="sound-list">
+            {% for sound in sounds %}
+                <li class="btn-group sound d-flex justify-content-center">
+                    <button class="btn border"><i class="fa fa-{{ sound.icon }} me-1"></i><span>{{ sound.file|removeExt }}</span></button>
+                    <a class="btn btn-danger sound-delete" href="{{ path('app_mj_sound_delete', {'sound': sound.id}) }}"><i class="bi bi-trash"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="btn-primary btn" href="{{ path('app_mj_sound_create') }}">Créer</a>
+    </div>
+{% endblock %}
