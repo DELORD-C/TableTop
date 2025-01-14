@@ -75,12 +75,12 @@
                             </nav>
                         </div>
 
-                        <a class="nav-link collapsed{% if app.request.attributes.get( '_route' ) starts with 'app_mj_sound' %} active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMusic" aria-expanded="false" aria-controls="collapseMusic">
+                        <a class="nav-link collapsed{% if app.request.attributes.get( '_route' ) starts with 'app_mj_sound' %} active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSound" aria-expanded="false" aria-controls="collapseSound">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-volume-high"></i></div>
                             Sons
                             <div class="sb-sidenav-collapse-arrow"><i class="bi bi-caret-down-fill"></i></div>
                         </a>
-                        <div class="collapse" id="collapseMusic" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapseSound" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link{% if app.request.get('_route') == 'app_mj_sound_create' %} active{% endif %}" href="{{ path('app_mj_sound_create') }}"><div class="sb-nav-link-icon"><i class="fa fa-plus"></i></div>Création</a>
                                 <a class="nav-link{% if app.request.get('_route') == 'app_mj_sound_list' %} active{% endif %}" href="{{ path('app_mj_sound_list') }}"><div class="sb-nav-link-icon"><i class="fa fa-list"></i></div>Liste</a>
