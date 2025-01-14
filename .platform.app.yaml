@@ -24,6 +24,9 @@ variables:
         APP_DEBUG: 4
     php:
         opcache.preload: config/preload.php
+        post_max_size: '1024M'
+        upload_max_filesize: '1024M'
+        upload_max_files: 1000
 build:
     flavor: none
 
@@ -35,6 +38,9 @@ web:
             root: "public"
             expires: 1h
             passthru: "/index.php"
+            request_buffering:
+                enabled: true
+                max_request_size: 600m
 
 mounts:
     "/var": { source: local, source_path: var }
