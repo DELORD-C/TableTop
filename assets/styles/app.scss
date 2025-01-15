@@ -20,6 +20,20 @@ input, .form-control, input:active, input:focus, .form-control:active, .form-con
   background-color: transparent;
 }
 
+main {
+  > div {
+    padding-top: 77px;
+
+    h1 {
+      margin: 0!important;
+      position: absolute;
+      top: 13px;
+      left: 20px;
+      font-weight: 100;
+    }
+  }
+}
+
 option {
   background-color: $body;
 }
