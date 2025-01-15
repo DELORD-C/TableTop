@@ -35,6 +35,11 @@ Encore
         to: '../assets/themes/[path][name].[ext]',
         includeSubdirectories: true
     })
+    .copyFiles({
+        from: './assets/pwa',
+        to: '../pwa/[path][name].[ext]',
+        includeSubdirectories: true
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
