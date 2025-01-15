@@ -1,7 +1,7 @@
 {
   "name": "TableTop",
   "short_name": "TableTop",
-  "start_url": ".",
+  "start_url": "/",
   "prefer_related_applications": false,
   "icons": [
     {
