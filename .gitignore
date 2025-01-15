@@ -24,6 +24,7 @@
 /public/uploads/
 /public/assets/
 /public/pwa/
+/public/manifest.json
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###

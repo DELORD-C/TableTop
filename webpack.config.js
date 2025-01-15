@@ -40,6 +40,11 @@ Encore
         to: '../pwa/[path][name].[ext]',
         includeSubdirectories: true
     })
+    .copyFiles({
+        from: './assets',
+        to: '../[name].[ext]',
+        pattern: /manifest\.json/
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
