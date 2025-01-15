@@ -1,11 +1,11 @@
 window.addEventListener('turbo:load', function () {
     initToolbar();
-
 });
 
 function initToolbar() {
     document.getElementById("sidebarToggle").addEventListener("click", function () {
         document.body.classList.toggle('sb-sidenav-toggled');
+        localStorage.setItem('sidebar', document.body.classList.contains('sb-sidenav-toggled') ? 'true' : 'false');
     })
 
     document.getElementById("layoutSidenav_content").addEventListener("click", function () {
@@ -17,18 +17,14 @@ function initToolbar() {
             collapseSidebar()
         }
     })
-
-    if (window.innerWidth < 992) {
-        document.body.classList.remove('sb-sidenav-toggled');
-    }
 }
 
 function collapseSidebar () {
-    console.log(document.querySelector('nav.navbar').offsetWidth)
     if (document.querySelector('nav.navbar').offsetWidth >= 992) {
         document.body.classList.add('sb-sidenav-toggled');
     }
     else {
         document.body.classList.remove('sb-sidenav-toggled');
     }
+    localStorage.setItem('sidebar', document.body.classList.contains('sb-sidenav-toggled') ? 'true' : 'false');
 }

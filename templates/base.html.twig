@@ -12,8 +12,13 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
 </head>
-    <body class="sb-sidenav-toggled">
+    <body>
+    <script id="sidebarInit">
+        if (localStorage.getItem('sidebar') === 'true') {
+            document.body.classList.add('sb-sidenav-toggled');
+        }
+        document.getElementById("sidebarInit").remove();
+    </script>
         {% block body %}{% endblock %}
-
     </body>
 </html>

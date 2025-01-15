@@ -8,10 +8,11 @@ document.addEventListener('turbo:load', function () {
 
 function initDice () {
     if (document.getElementById('dice-box')) {
-        diceBox = new DiceBox("#dice-box", {
+        diceBox = new DiceBox({
+            container: "#dice-box",
             assetPath: "/assets/",
+            theme: "diceOfRolling-fate",
             scale: 6,
-            theme: "rock",
             gravity: 4
         });
 
