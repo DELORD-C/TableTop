@@ -3,6 +3,10 @@
 @import 'trix';
 @import 'dice';
 
+* {
+  box-sizing: border-box;
+}
+
 a {
   text-decoration: none!important;
 }
@@ -23,6 +27,9 @@ input, .form-control, input:active, input:focus, .form-control:active, .form-con
 main {
   > div {
     padding-top: 77px;
+    height: calc(100vh - 125px);
+    overflow-y: scroll;
+    position: relative;
 
     h1 {
       margin: 0!important;
@@ -83,7 +90,7 @@ table {
 
 .form-full {
   width: 100%;
-  height: calc(100vh - 190px);
+  height: 100%;
 }
 
 .overflow-x {
@@ -597,11 +604,9 @@ nav {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .sb-sidenav-menu {
-    height: calc(100vh - 109px);
-  }
 
+
+@media screen and (max-width: 1200px) {
   .ps-3 {
       padding: 0!important;
   }
@@ -610,7 +615,6 @@ nav {
     padding: 0 15px;
     display: flex;
     flex-wrap: wrap;
-    height: fit-content;
     justify-content: space-between;
     align-items: center;
 
@@ -627,27 +631,32 @@ nav {
     }
 
     #music-track {
-      width: 80px;
+      width: 75px;
     }
   }
 }
 
 @media screen and (max-width: 800px) {
-  .col-6 {
-    width: 100%;
+  nav.navbar.sb-topnav {
+    height: 78px;
   }
-}
-@media screen and (max-width: 593px) {
+
   .sb-sidenav-menu {
     height: calc(100vh - 147px);
   }
 
   #layoutSidenav #layoutSidenav_content {
-    min-height: calc(100vh - 79px);
+    height: calc(100vh - 79px);
   }
 
   main > div {
-    min-height: calc(100vh - 148px)!important;
+    height: calc(100vh - 148px)!important;
+  }
+}
+
+@media screen and (max-width: 603px) {
+  .col-6 {
+    width: 100%;
   }
 }
 
