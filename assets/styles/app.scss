@@ -587,11 +587,21 @@ nav {
 }
 
 .sb-sidenav-menu {
-  max-height: calc(100vh - 125px);
+  height: calc(100vh - 125px);
   overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1200px) {
+  .sb-sidenav-menu {
+    height: calc(100vh - 109px);
+  }
+
   .ps-3 {
       padding: 0!important;
   }
@@ -625,6 +635,19 @@ nav {
 @media screen and (max-width: 800px) {
   .col-6 {
     width: 100%;
+  }
+}
+@media screen and (max-width: 593px) {
+  .sb-sidenav-menu {
+    height: calc(100vh - 147px);
+  }
+
+  #layoutSidenav #layoutSidenav_content {
+    min-height: calc(100vh - 79px);
+  }
+
+  main > div {
+    min-height: calc(100vh - 148px)!important;
   }
 }
 
