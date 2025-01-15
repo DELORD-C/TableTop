@@ -24,6 +24,7 @@ require('./js/ajax');
 require('./js/fight');
 require('./js/map');
 require('./js/sound');
+require('./js/pwa');
 
 // Start the Stimulus application
 import './bootstrap';

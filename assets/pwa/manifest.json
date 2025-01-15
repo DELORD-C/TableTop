@@ -1,6 +1,8 @@
 {
   "name": "TableTop",
   "short_name": "TableTop",
+  "start_url": ".",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/build/web-app-manifest-192x192.png",
@@ -15,7 +17,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "standalone"
 }
