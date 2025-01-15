@@ -24,9 +24,11 @@
         }
         document.getElementById("sidebarInit").remove();
     </script>
-        {% include 'includes/_dice.html.twig' %}
-        {% include 'includes/_notify.html.twig' %}
-        {% include 'includes/_nav.html.twig' %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% include 'includes/_dice.html.twig' %}
+            {% include 'includes/_notify.html.twig' %}
+            {% include 'includes/_nav.html.twig' %}
+        {% endif %}
         {% include 'includes/_pwa.html.twig' %}
         {% block body %}{% endblock %}
     </body>

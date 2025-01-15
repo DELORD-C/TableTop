@@ -2,4 +2,4 @@ Update fight player side (true update, not refresh)
 
 mobile admin menu
 
-PWA
+sound play visual progress
