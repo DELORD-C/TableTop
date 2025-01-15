@@ -1,17 +1,16 @@
 {
-	"name": "@3d-dice/theme-dice-of-rolling",
-  "private": false,
+	"name": "@3d-dice/theme-genesys",
+	"private": false,
 	"author": {
-		"name": "Frank Ali"
+		"name": "Arran France"
 	},
-	"description": "Multicolored dice skin based on Dice of Rolling",
-	"version": "0.2.1",
+	"description": "Genesys dice",
+	"version": "0.1.1",
 	"keywords": [
 		"3D",
 		"dice",
     "skins",
     "theme",
-    "dice of rolling",
 		"javascript",
 		"rpg",
 		"dnd",
@@ -23,7 +22,7 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/3d-dice/dice-themes",
-    "directory": "themes/diceOfRolling"
+    "directory": "themes/genesys"
 	},
 	"bugs": {
 		"url": "https://github.com/3d-dice/dice-themes/issues"
