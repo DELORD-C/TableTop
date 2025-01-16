@@ -12,8 +12,8 @@ function initToolbar() {
         collapseSidebar()
     })
 
-    document.querySelector('nav').addEventListener("click", function (e) {
-        if (!e.target.closest("#sidebarToggle")) {
+    document.querySelector('nav.sb-topnav').addEventListener("click", function (e) {
+        if (e.target === document.querySelector('nav.sb-topnav')) {
             collapseSidebar()
         }
     })
