@@ -458,7 +458,8 @@ nav {
 #pin-popup {
   position: absolute;
   width: 100%;
-  height: calc(100% - 70px);
+  height: 100%;
+  top: 0;
   backdrop-filter: blur(10px);
   background: #000000a3;
   display: flex;
@@ -555,8 +556,6 @@ nav {
 
 #ambiance-selector {
   a {
-    border: 1px solid rgba(255, 255, 255, 0.75);;
-    transition: 0.3s;
     i {
       transition: 0.3s;
     }
@@ -587,10 +586,7 @@ nav {
 }
 
 #install {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1;
+  margin: -20px 0;
 }
 
 .sb-sidenav-menu {
@@ -604,7 +600,23 @@ nav {
   }
 }
 
+#ambiance-selector > .btn, #sound-effects > .btn {
+  border: 1px solid rgba(255, 255, 255, 0.5)!important;
 
+  &:hover {
+    background: rgba(255, 255, 255, 0.2)!important;
+  }
+}
+
+@keyframes soundFill {
+  0% {
+    box-shadow: 0px -19px 2px -20px rgba(255, 255, 255, 0.5) inset;
+  }
+
+  100% {
+    box-shadow: 0px -50px 2px -10px rgba(255, 255, 255, 0.5) inset;
+  }
+}
 
 @media screen and (max-width: 1200px) {
   .ps-3 {

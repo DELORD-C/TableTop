@@ -13,9 +13,6 @@ require('trix');
 // Axios
 require('axios');
 
-// Howler
-import {Howl, Howler} from 'howler';
-
 // Custom Scripts
 require('./js/all');
 require('./js/script');

@@ -1,3 +1,5 @@
+import {Howl, Howler} from 'howler';
+
 let playing,
     elapsed = 0,
     musicInterval,
@@ -58,8 +60,12 @@ function initSoundEvents() {
                     if (playing) {
                         playing.fade(0.3, 0.7, 1000);
                     }
+                },
+                onplay: function() {
+                    animateProgress(soundBtn, sound)
                 }
             });
+            sound.load();
             if (playing) {
                 playing.fade(0.7, 0.3, 200);
             }
@@ -107,6 +113,13 @@ function initSoundEvents() {
         document.querySelector('#music-toggle > i').classList.remove('bi-play');
         document.querySelector('#music-toggle > i').classList.add('bi-pause');
     }
+}
+
+function animateProgress(b, s) {
+    b.style.animation = "soundFill " + s.duration() + "s linear";
+    setTimeout(function () {
+        b.style.animation = "";
+    }, s.duration() * 1000);
 }
 
 function playSound(file, next = false) {
