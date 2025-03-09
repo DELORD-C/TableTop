@@ -30,7 +30,7 @@ variables:
 build:
     flavor: none
 
-disk: 4096
+disk: 3000
 
 web:
     locations:
